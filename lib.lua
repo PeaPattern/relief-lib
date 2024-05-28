@@ -297,139 +297,8 @@ local script = G2L["3"];
 	local ExampleModule = script.Module
 	local ExampleList = script.List
 	
-	local function repositionCategories()
-		for i, CategoryInfo in ipairs(Categories) do
-			local NewPosition = UDim2.new(i / (#Categories + 1), 0, 0.5, 0)
-			CategoryInfo["UI"].Position = NewPosition
-		end
-	end
-	
-	Library.addCategory = function(Name, Icon)
-		local NewCategory = ExampleCategory:Clone()
-		local Tab = NewCategory.Tab
-		local Modules = NewCategory.Modules
-		local Title = Tab.Title
-		local IconElement = Tab.Icon
-	
-		Title.Text = Name
-		IconElement.Image = Icon
-		NewCategory.Name = Name
-	
-		NewCategory.Parent = ClickGui
-	
-		local CategoryInfo = {
-			["Name"] = Name,
-			["Icon"] = Icon,
-			["Modules"] = {},
-			["UI"] = NewCategory
-		}
-		Categories[#Categories + 1] = CategoryInfo
-	
-		repositionCategories()
-	end
-	
-	Library.getCategory = function(Category)
-		for _, CategoryInfo in Categories do
-			if CategoryInfo["Name"] == Category then
-				return CategoryInfo
-			end
-		end
-	end
-	
-	Library.addModule = function(Category, Name, OnEnable, OnDisable)
-		local CategoryInfo = getCategory(Category)
-		local CategoryUI = CategoryInfo["UI"]
-		local Modules = CategoryUI.Modules
-	
-		local NewList = ExampleList:Clone()
-		NewList.Parent = ModuleList
-		NewList.Title.Text = Name
-		NewList.Size = UDim2.new(0.07 * NewList.Title.Text:len(), 0, 0.03, 0)
-		NewList.Visible = false
-	
-		local NewModule = ExampleModule:Clone()
-		local Expand = NewModule.Expand
-		local Title = NewModule.Title
-	
-		NewModule.Parent = Modules
-		Title.Text = Name
-	
-		local TInfo = TweenInfo.new(0.4, Enum.EasingStyle.Quint, Enum.EasingDirection.Out)
-		local HoverTween = TweenService:Create(NewModule, TInfo, { BackgroundTransparency = 0.8 })
-		local UnhoverTween = TweenService:Create(NewModule, TInfo, { BackgroundTransparency = 1 })
-		local EnabledHoverTween = TweenService:Create(NewModule, TInfo, { BackgroundTransparency = 0.65 })
-	
-		local Toggle = false
-	
-		NewModule.InputBegan:Connect(function(input)
-			if Toggle then
-				if input.UserInputType == Enum.UserInputType.MouseMovement then
-					EnabledHoverTween:Play()
-				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-					Toggle = not Toggle
-					if Toggle then
-						OnEnable()
-						NewList.Visible = true
-						EnabledHoverTween:Play()
-					else
-						OnDisable()
-						NewList.Visible = false
-						HoverTween:Play()
-					end
-				end
-			else
-				if input.UserInputType == Enum.UserInputType.MouseMovement then
-					HoverTween:Play()
-				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-					Toggle = not Toggle
-					if Toggle then
-						OnEnable()
-						NewList.Visible = true
-						EnabledHoverTween:Play()
-					else
-						OnDisable()
-						NewList.Visible = false
-						HoverTween:Play()
-					end
-				end
-			end
-		end)
-	
-		NewModule.InputEnded:Connect(function(input)
-			if not Toggle and input.UserInputType == Enum.UserInputType.MouseMovement then
-				UnhoverTween:Play()
-			end
-		end)
-	
-		CategoryInfo["Modules"][#CategoryInfo["Modules"] + 1] = {
-			["Name"] = Name,
-			["OnEnable"] = OnEnable,
-			["OnDisable"] = OnDisable,
-			["Env"] = {},
-			["UI"] = NewModule
-		}
-	end
-	
-	Library.getEnv = function(Category, Name)
-		local CategoryInfo = getCategory(Category)
-		for _, ModuleInfo in pairs(CategoryInfo["Modules"]) do
-			if ModuleInfo["Name"] == Name then
-				return ModuleInfo["Env"]
-			end
-		end
-	end
-	
-	Library.setEnv = function(Category, Name, New)
-		local CategoryInfo = getCategory(Category)
-		for _, ModuleInfo in pairs(CategoryInfo["Modules"]) do
-			if ModuleInfo["Name"] == Name then
-				ModuleInfo["Env"] = New
-			end
-		end
-	end
-	
-	for _, Category in ClickGui:GetChildren() do
-		if not Category:IsA("Frame") then continue end
+	local function Dragify(Category)
+		if not Category:IsA("Frame") then return end
 	
 		local Tab = Category.Tab
 		local Expand = Tab.Expand
@@ -530,8 +399,140 @@ local script = G2L["3"];
 		end)
 	end
 	
-	return Library
+	local function repositionCategories()
+		for i, CategoryInfo in ipairs(Categories) do
+			local NewPosition = UDim2.new(i / (#Categories + 1), 0, 0.5, 0)
+			CategoryInfo["UI"].Position = NewPosition
+		end
+	end
 	
+	Library.addCategory = function(Name, Icon)
+		local NewCategory = ExampleCategory:Clone()
+		local Tab = NewCategory.Tab
+		local Modules = NewCategory.Modules
+		local Title = Tab.Title
+		local IconElement = Tab.Icon
+	
+		Title.Text = Name
+		IconElement.Image = Icon
+		NewCategory.Name = Name
+	
+		NewCategory.Parent = ClickGui
+	
+		local CategoryInfo = {
+			["Name"] = Name,
+			["Icon"] = Icon,
+			["Modules"] = {},
+			["UI"] = NewCategory
+		}
+		Categories[#Categories + 1] = CategoryInfo
+	
+		repositionCategories()
+		Dragify(NewCategory)
+	end
+	
+	Library.getCategory = function(Category)
+		for _, CategoryInfo in Categories do
+			if CategoryInfo["Name"] == Category then
+				return CategoryInfo
+			end
+		end
+	end
+	
+	Library.addModule = function(Category, Name, OnEnable, OnDisable)
+		local CategoryInfo = Library.getCategory(Category)
+		local CategoryUI = CategoryInfo["UI"]
+		local Modules = CategoryUI.Modules
+	
+		local NewList = ExampleList:Clone()
+		NewList.Parent = ModuleList
+		NewList.Title.Text = Name
+		NewList.Size = UDim2.new(0.07 * NewList.Title.Text:len(), 0, 0.03, 0)
+		NewList.Visible = false
+	
+		local NewModule = ExampleModule:Clone()
+		local Expand = NewModule.Expand
+		local Title = NewModule.Title
+	
+		NewModule.Parent = Modules
+		Title.Text = Name
+	
+		local TInfo = TweenInfo.new(0.4, Enum.EasingStyle.Quint, Enum.EasingDirection.Out)
+		local HoverTween = TweenService:Create(NewModule, TInfo, { BackgroundTransparency = 0.8 })
+		local UnhoverTween = TweenService:Create(NewModule, TInfo, { BackgroundTransparency = 1 })
+		local EnabledHoverTween = TweenService:Create(NewModule, TInfo, { BackgroundTransparency = 0.65 })
+	
+		local Toggle = false
+	
+		NewModule.InputBegan:Connect(function(input)
+			if Toggle then
+				if input.UserInputType == Enum.UserInputType.MouseMovement then
+					EnabledHoverTween:Play()
+				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+					Toggle = not Toggle
+					if Toggle then
+						OnEnable()
+						NewList.Visible = true
+						EnabledHoverTween:Play()
+					else
+						OnDisable()
+						NewList.Visible = false
+						HoverTween:Play()
+					end
+				end
+			else
+				if input.UserInputType == Enum.UserInputType.MouseMovement then
+					HoverTween:Play()
+				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+					Toggle = not Toggle
+					if Toggle then
+						OnEnable()
+						NewList.Visible = true
+						EnabledHoverTween:Play()
+					else
+						OnDisable()
+						NewList.Visible = false
+						HoverTween:Play()
+					end
+				end
+			end
+		end)
+	
+		NewModule.InputEnded:Connect(function(input)
+			if not Toggle and input.UserInputType == Enum.UserInputType.MouseMovement then
+				UnhoverTween:Play()
+			end
+		end)
+	
+		CategoryInfo["Modules"][#CategoryInfo["Modules"] + 1] = {
+			["Name"] = Name,
+			["OnEnable"] = OnEnable,
+			["OnDisable"] = OnDisable,
+			["Env"] = {},
+			["UI"] = NewModule
+		}
+	end
+	
+	Library.getEnv = function(Category, Name)
+		local CategoryInfo = Library.getCategory(Category)
+		for _, ModuleInfo in pairs(CategoryInfo["Modules"]) do
+			if ModuleInfo["Name"] == Name then
+				return ModuleInfo["Env"]
+			end
+		end
+	end
+	
+	Library.setEnv = function(Category, Name, New)
+		local CategoryInfo = Library.getCategory(Category)
+		for _, ModuleInfo in pairs(CategoryInfo["Modules"]) do
+			if ModuleInfo["Name"] == Name then
+				ModuleInfo["Env"] = New
+			end
+		end
+	end
+
+	return Library
 end;
-local lib = C_3();
+local lib = C_3()
+
 return lib;

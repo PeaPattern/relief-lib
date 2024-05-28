@@ -439,7 +439,7 @@ local script = G2L["3"];
 		end
 	end
 	
-	Library.addModule = function(Category, Name, OnEnable, OnDisable)
+	Library.addModule = function(Category, Name, Callback)
 		local CategoryInfo = Library.getCategory(Category)
 		local CategoryUI = CategoryInfo["UI"]
 		local Modules = CategoryUI.Modules
@@ -471,11 +471,11 @@ local script = G2L["3"];
 				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 					Toggle = not Toggle
 					if Toggle then
-						OnEnable()
+						Callback(true)
 						NewList.Visible = true
 						EnabledHoverTween:Play()
 					else
-						OnDisable()
+						Callback(false)
 						NewList.Visible = false
 						HoverTween:Play()
 					end
@@ -486,11 +486,11 @@ local script = G2L["3"];
 				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 					Toggle = not Toggle
 					if Toggle then
-						OnEnable()
+						Callback(true)
 						NewList.Visible = true
 						EnabledHoverTween:Play()
 					else
-						OnDisable()
+						Callback(false)
 						NewList.Visible = false
 						HoverTween:Play()
 					end
@@ -506,8 +506,7 @@ local script = G2L["3"];
 	
 		CategoryInfo["Modules"][#CategoryInfo["Modules"] + 1] = {
 			["Name"] = Name,
-			["OnEnable"] = OnEnable,
-			["OnDisable"] = OnDisable,
+			["Callback"] = Callback(),
 			["Env"] = {},
 			["UI"] = NewModule
 		}
@@ -530,7 +529,7 @@ local script = G2L["3"];
 			end
 		end
 	end
-
+	
 	return Library
 end;
 local lib = C_3()

@@ -533,6 +533,5 @@ local script = G2L["3"];
 	return Library
 	
 end;
-local lib = task.spawn(C_3);
-
+local lib = C_3();
 return lib;

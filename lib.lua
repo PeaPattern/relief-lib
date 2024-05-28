@@ -506,7 +506,7 @@ local script = G2L["3"];
 	
 		CategoryInfo["Modules"][#CategoryInfo["Modules"] + 1] = {
 			["Name"] = Name,
-			["Callback"] = Callback(),
+			["Callback"] = Callback,
 			["Env"] = {},
 			["UI"] = NewModule
 		}

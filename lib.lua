@@ -16,6 +16,7 @@ G2L["1"]["IgnoreGuiInset"] = true;
 G2L["1"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
 G2L["1"]["Name"] = [[Screen]];
 G2L["1"]["ResetOnSpawn"] = false;
+G2L["1"]["DisplayOrder"] = 99999;
 
 -- StarterGui.Screen.ClickGui
 G2L["2"] = Instance.new("Frame", G2L["1"]);

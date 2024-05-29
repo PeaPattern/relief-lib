@@ -277,12 +277,14 @@ local script = G2L["3"];
 	local Hud = Screen.Hud
 	local ModuleList = Hud.ModuleList
 	
+	local Connections = {}
+	
 	local Blur = Instance.new("BlurEffect")
 	Blur.Enabled = true
 	Blur.Parent = Lighting
 	Blur.Size = 15
 	
-	UserInputService.InputBegan:Connect(function(Input, GPE)
+	Connections[#Connections + 1] = UserInputService.InputBegan:Connect(function(Input, GPE)
 		if GPE then return end
 		if Input.KeyCode == Enum.KeyCode.LeftAlt or Input.KeyCode == Enum.KeyCode.RightAlt then
 			ClickGui.Visible = not ClickGui.Visible
@@ -347,7 +349,7 @@ local script = G2L["3"];
 			rotationTween:Play()
 		end
 	
-		Tab.InputBegan:Connect(function(input)
+		Connections[#Connections + 1] = Tab.InputBegan:Connect(function(input)
 			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 				dragging = true
 				dragStart = input.Position
@@ -367,19 +369,19 @@ local script = G2L["3"];
 			end
 		end)
 	
-		Tab.InputChanged:Connect(function(input)
+		Connections[#Connections + 1] = Tab.InputChanged:Connect(function(input)
 			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
 				dragInput = input
 			end
 		end)
 	
-		UserInputService.InputChanged:Connect(function(input)
+		Connections[#Connections + 1] = UserInputService.InputChanged:Connect(function(input)
 			if dragging and input == dragInput then
 				update(input)
 			end
 		end)
 	
-		Expand.InputBegan:Connect(function(input)
+		Connections[#Connections + 1] = Expand.InputBegan:Connect(function(input)
 			if input.UserInputType == Enum.UserInputType.MouseButton1 then
 				local goalSize
 				if isExpanded then
@@ -447,7 +449,7 @@ local script = G2L["3"];
 		local NewList = ExampleList:Clone()
 		NewList.Parent = ModuleList
 		NewList.Title.Text = Name
-		NewList.Size = UDim2.new(0.09 * NewList.Title.Text:len(), 0, 0.03, 0)
+		NewList.Size = UDim2.new(0.08 * NewList.Title.Text:len(), 0, 0.03, 0)
 		NewList.Visible = false
 	
 		local NewModule = ExampleModule:Clone()
@@ -464,7 +466,7 @@ local script = G2L["3"];
 	
 		local Toggle = false
 	
-		NewModule.InputBegan:Connect(function(input)
+		Connections[#Connections + 1] = NewModule.InputBegan:Connect(function(input)
 			if Toggle then
 				if input.UserInputType == Enum.UserInputType.MouseMovement then
 					EnabledHoverTween:Play()
@@ -498,7 +500,7 @@ local script = G2L["3"];
 			end
 		end)
 	
-		NewModule.InputEnded:Connect(function(input)
+		Connections[#Connections + 1] = NewModule.InputEnded:Connect(function(input)
 			if not Toggle and input.UserInputType == Enum.UserInputType.MouseMovement then
 				UnhoverTween:Play()
 			end
@@ -530,8 +532,16 @@ local script = G2L["3"];
 		end
 	end
 	
+	Library.KillScript = function()
+		Screen:Destroy()
+		Blur:Destroy()
+		for _, c in Connections do
+			c:Disconnect()
+		end
+	end
+
 	return Library
 end;
-local lib = C_3()
+local llib = C_3()
 
 return lib;

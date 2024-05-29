@@ -9,6 +9,10 @@ relief.addCategory("Player", "rbxassetid://16149111731")
 relief.addCategory("World", "rbxassetid://17640958405")
 relief.addCategory("Misc", "rbxassetid://1538581893")
 
-relief.addModule("Movement", "speedhax", function(Toggled)
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Toggled and 50 or 16
+relief.addModule("Movement", "Speed", function(Toggled)
+    game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = Toggled and 50 or 16
+end)
+
+relief.addModule("Misc", "KillScript", function()
+    relief.KillScript()
 end)

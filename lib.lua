@@ -542,6 +542,6 @@ local script = G2L["3"];
 
 	return Library
 end;
-local llib = C_3()
+local lib = C_3()
 
 return lib;

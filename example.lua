@@ -1,3 +1,4 @@
+-- PRESS ALT TO TOGGLE UI
 local relief = loadstring(game:HttpGet("https://raw.githubusercontent.com/PeaPattern/relief-lib/main/lib.lua"))()
 
 relief.addCategory("Movement", "rbxassetid://1114393432")

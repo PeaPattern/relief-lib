@@ -447,7 +447,7 @@ local script = G2L["3"];
 		local NewList = ExampleList:Clone()
 		NewList.Parent = ModuleList
 		NewList.Title.Text = Name
-		NewList.Size = UDim2.new(0.07 * NewList.Title.Text:len(), 0, 0.03, 0)
+		NewList.Size = UDim2.new(0.09 * NewList.Title.Text:len(), 0, 0.03, 0)
 		NewList.Visible = false
 	
 		local NewModule = ExampleModule:Clone()

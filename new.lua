@@ -7,11 +7,11 @@
  Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER
 ]=]
 
--- Instances: 62 | Scripts: 1 | Modules: 0
+-- Instances: 64 | Scripts: 1 | Modules: 0
 local G2L = {};
 
 -- StarterGui.Screen
-G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+G2L["1"] = Instance.new("ScreenGui", game:GetService("CoreGui"));
 G2L["1"]["IgnoreGuiInset"] = true;
 G2L["1"]["DisplayOrder"] = 99999;
 G2L["1"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
@@ -461,7 +461,7 @@ G2L["35"]["TextWrapped"] = true;
 G2L["35"]["BorderSizePixel"] = 0;
 G2L["35"]["TextScaled"] = true;
 G2L["35"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["35"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["35"]["TextXAlignment"] = Enum.TextXAlignment.Right;
 G2L["35"]["FontFace"] = Font.new([[rbxasset://fonts/families/Ubuntu.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
 G2L["35"]["TextSize"] = 14;
 G2L["35"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
@@ -479,72 +479,82 @@ G2L["36"]["PaddingRight"] = UDim.new(0.10000000149011612, 0);
 G2L["36"]["PaddingBottom"] = UDim.new(0.10000000149011612, 0);
 G2L["36"]["PaddingLeft"] = UDim.new(0.10000000149011612, 0);
 
+-- StarterGui.Screen.ClickGui.LocalScript.hover
+G2L["37"] = Instance.new("Sound", G2L["3"]);
+G2L["37"]["Name"] = [[hover]];
+G2L["37"]["SoundId"] = [[rbxassetid://6895079853]];
+
+-- StarterGui.Screen.ClickGui.LocalScript.click
+G2L["38"] = Instance.new("Sound", G2L["3"]);
+G2L["38"]["Name"] = [[click]];
+G2L["38"]["SoundId"] = [[rbxassetid://9083627113]];
+
 -- StarterGui.Screen.Hud
-G2L["37"] = Instance.new("Frame", G2L["1"]);
-G2L["37"]["BorderSizePixel"] = 0;
-G2L["37"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["37"]["BackgroundTransparency"] = 1;
-G2L["37"]["Size"] = UDim2.new(1, 0, 1, 0);
-G2L["37"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["37"]["Name"] = [[Hud]];
+G2L["39"] = Instance.new("Frame", G2L["1"]);
+G2L["39"]["BorderSizePixel"] = 0;
+G2L["39"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["39"]["BackgroundTransparency"] = 1;
+G2L["39"]["Size"] = UDim2.new(1, 0, 1, 0);
+G2L["39"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["39"]["Name"] = [[Hud]];
 
 -- StarterGui.Screen.Hud.Watermark
-G2L["38"] = Instance.new("ImageLabel", G2L["37"]);
-G2L["38"]["BorderSizePixel"] = 0;
-G2L["38"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["38"]["ImageTransparency"] = 0.5;
-G2L["38"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-G2L["38"]["Image"] = [[http://www.roblox.com/asset/?id=17640797571]];
-G2L["38"]["Size"] = UDim2.new(0.12777817249298096, 0, 0.7186253666877747, 0);
-G2L["38"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["38"]["Name"] = [[Watermark]];
-G2L["38"]["BackgroundTransparency"] = 1;
-G2L["38"]["Position"] = UDim2.new(0.06387225538492203, 0, 0.9329268336296082, 0);
-
--- StarterGui.Screen.Hud.Watermark.UIAspectRatioConstraint
-G2L["39"] = Instance.new("UIAspectRatioConstraint", G2L["38"]);
-G2L["39"]["AspectRatio"] = 1.4450758695602417;
-
--- StarterGui.Screen.Hud.ModuleList
-G2L["3a"] = Instance.new("Frame", G2L["37"]);
+G2L["3a"] = Instance.new("ImageLabel", G2L["39"]);
 G2L["3a"]["BorderSizePixel"] = 0;
 G2L["3a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["3a"]["BackgroundTransparency"] = 1;
-G2L["3a"]["Size"] = UDim2.new(0.1002994105219841, 0, 1, 0);
+G2L["3a"]["ImageTransparency"] = 0.5;
+G2L["3a"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+G2L["3a"]["Image"] = [[http://www.roblox.com/asset/?id=17640797571]];
+G2L["3a"]["Size"] = UDim2.new(0.12777817249298096, 0, 0.7186253666877747, 0);
 G2L["3a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["3a"]["Position"] = UDim2.new(0.8997005820274353, 0, 0, 0);
-G2L["3a"]["Name"] = [[ModuleList]];
+G2L["3a"]["Name"] = [[Watermark]];
+G2L["3a"]["BackgroundTransparency"] = 1;
+G2L["3a"]["Position"] = UDim2.new(0.06387225538492203, 0, 0.9329268336296082, 0);
+
+-- StarterGui.Screen.Hud.Watermark.UIAspectRatioConstraint
+G2L["3b"] = Instance.new("UIAspectRatioConstraint", G2L["3a"]);
+G2L["3b"]["AspectRatio"] = 1.4450758695602417;
+
+-- StarterGui.Screen.Hud.ModuleList
+G2L["3c"] = Instance.new("Frame", G2L["39"]);
+G2L["3c"]["BorderSizePixel"] = 0;
+G2L["3c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["3c"]["BackgroundTransparency"] = 1;
+G2L["3c"]["Size"] = UDim2.new(0.1002994105219841, 0, 1, 0);
+G2L["3c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3c"]["Position"] = UDim2.new(0.8997005820274353, 0, 0, 0);
+G2L["3c"]["Name"] = [[ModuleList]];
 
 -- StarterGui.Screen.Hud.ModuleList.UIListLayout
-G2L["3b"] = Instance.new("UIListLayout", G2L["3a"]);
-G2L["3b"]["VerticalAlignment"] = Enum.VerticalAlignment.Bottom;
-G2L["3b"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Right;
-G2L["3b"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+G2L["3d"] = Instance.new("UIListLayout", G2L["3c"]);
+G2L["3d"]["VerticalAlignment"] = Enum.VerticalAlignment.Bottom;
+G2L["3d"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Right;
+G2L["3d"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
 
 -- StarterGui.Screen.MobileButton
-G2L["3c"] = Instance.new("TextButton", G2L["1"]);
-G2L["3c"]["TextWrapped"] = true;
-G2L["3c"]["BorderSizePixel"] = 0;
-G2L["3c"]["AutoButtonColor"] = false;
-G2L["3c"]["TextScaled"] = true;
-G2L["3c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["3c"]["TextSize"] = 14;
-G2L["3c"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["3c"]["TextColor3"] = Color3.fromRGB(75, 156, 255);
-G2L["3c"]["Size"] = UDim2.new(0.03139931336045265, 0, 0.07139692455530167, 0);
-G2L["3c"]["Name"] = [[MobileButton]];
-G2L["3c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["3c"]["Text"] = [[-]];
-G2L["3c"]["Position"] = UDim2.new(0.4841540455818176, 0, 0.022172948345541954, 0);
-G2L["3c"]["BackgroundTransparency"] = 0.20000000298023224;
+G2L["3e"] = Instance.new("TextButton", G2L["1"]);
+G2L["3e"]["TextWrapped"] = true;
+G2L["3e"]["BorderSizePixel"] = 0;
+G2L["3e"]["AutoButtonColor"] = false;
+G2L["3e"]["TextScaled"] = true;
+G2L["3e"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3e"]["TextSize"] = 14;
+G2L["3e"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["3e"]["TextColor3"] = Color3.fromRGB(75, 156, 255);
+G2L["3e"]["Size"] = UDim2.new(0.03139931336045265, 0, 0.07139692455530167, 0);
+G2L["3e"]["Name"] = [[MobileButton]];
+G2L["3e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3e"]["Text"] = [[-]];
+G2L["3e"]["Position"] = UDim2.new(0.4841540455818176, 0, 0.022172948345541954, 0);
+G2L["3e"]["BackgroundTransparency"] = 0.20000000298023224;
 
 -- StarterGui.Screen.MobileButton.UIAspectRatioConstraint
-G2L["3d"] = Instance.new("UIAspectRatioConstraint", G2L["3c"]);
+G2L["3f"] = Instance.new("UIAspectRatioConstraint", G2L["3e"]);
 
 
 -- StarterGui.Screen.MobileButton.UICorner
-G2L["3e"] = Instance.new("UICorner", G2L["3c"]);
-G2L["3e"]["CornerRadius"] = UDim.new(0.25, 0);
+G2L["40"] = Instance.new("UICorner", G2L["3e"]);
+G2L["40"]["CornerRadius"] = UDim.new(0.25, 0);
 
 -- StarterGui.Screen.ClickGui.LocalScript
 local function C_3()
@@ -561,11 +571,22 @@ local script = G2L["3"];
 	local MobileButton = Screen.MobileButton
 	
 	local Connections = {}
+	local Library = {}
+	Library.Keybinds = {Enum.KeyCode.LeftAlt, Enum.KeyCode.RightAlt}
+	Library.enabledSfx = true
 	
 	local Blur = Instance.new("BlurEffect")
 	Blur.Enabled = true
 	Blur.Parent = Lighting
 	Blur.Size = 10
+	
+	local function playSound(sound: Sound)
+		if not Library.enabledSfx then return end
+		local sfx = sound:Clone()
+		sfx.PlayOnRemove = true
+		sfx.Parent = workspace
+		sfx:Destroy()
+	end
 	
 	MobileButton.MouseButton1Down:Connect(function()
 		ClickGui.Visible = not ClickGui.Visible
@@ -581,14 +602,20 @@ local script = G2L["3"];
 	
 	Connections[#Connections + 1] = UserInputService.InputBegan:Connect(function(Input, GPE)
 		if GPE then return end
-		if Input.KeyCode == Enum.KeyCode.LeftAlt or Input.KeyCode == Enum.KeyCode.RightAlt then
+		if table.find(Library.Keybinds, Input.KeyCode) then
 			ClickGui.Visible = not ClickGui.Visible
 			Blur.Enabled = ClickGui.Visible
+			if ClickGui.Visible then
+				MobileButton.TextColor3 = Color3.fromRGB(74, 155, 255)
+				MobileButton.Text = "-"
+			else
+				MobileButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+				MobileButton.Text = "+"
+			end
 		end
 	end)
 	
 	local Categories = {}
-	local Library = {}
 	
 	local ExampleCategory = script.Category
 	local ExampleModule = script.Module
@@ -769,7 +796,7 @@ local script = G2L["3"];
 		local NewList = ExampleList:Clone()
 		NewList.Parent = ModuleList
 		NewList.Title.Text = Name
-		NewList.Size = UDim2.new(0.08 * NewList.Title.Text:len(), 0, 0.03, 0)
+		NewList.Size = UDim2.new(0.07 * NewList.Title.Text:len(), 0, 0.03, 0)
 		NewList.Visible = false
 	
 		local NewModule = ExampleModule:Clone()
@@ -792,10 +819,12 @@ local script = G2L["3"];
 		local SettingToggle = false
 		
 		local function toggleModule()
+			playSound(script.click)
 			Toggle = not Toggle
 			Callback(Toggle)
 			NewList.Visible = Toggle
 			if Toggle then
+				playSound(script.hover)
 				EnabledHoverTween:Play()
 			else
 				UnhoverTween:Play()
@@ -832,12 +861,14 @@ local script = G2L["3"];
 			
 			if Toggle then
 				if input.UserInputType == Enum.UserInputType.MouseMovement then
+					playSound(script.hover)
 					EnabledHoverTween:Play()
 				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 					toggleModule()
 				end
 			else
 				if input.UserInputType == Enum.UserInputType.MouseMovement then
+					playSound(script.hover)
 					HoverTween:Play()
 				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 					toggleModule()
@@ -947,9 +978,49 @@ local script = G2L["3"];
 	
 	Library.ModuleList = ModuleList
 	Library.MobileButton = MobileButton
+	
+	Library.addCategory("Movement", "rbxassetid://1114393432")
+	Library.addCategory("Combat", "rbxassetid://7485051715")
+	Library.addCategory("Render", "rbxassetid://13321848320")
+	Library.addCategory("Exploit", "rbxassetid://7562374548")
+	Library.addCategory("Player", "rbxassetid://16149111731")
+	Library.addCategory("World", "rbxassetid://17640958405")
+	Library.addCategory("Misc", "rbxassetid://1538581893")
+	
+	local SpeedAmount = 50
+	Library.addModule("Movement", "Speed", function(Toggled)
+		game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = Toggled and SpeedAmount or 16
+	end, {
+		{
+			["Type"] = "TextBox",
+			["Title"] = "title test",
+			["Placeholder"] = "placeholder",
+			["Callback"] = function(Text)
+				SpeedAmount = tonumber(Text) or 16
+			end,
+		},
+		{
+			["Type"] = "Toggle",
+			["Title"] = "toggle test",
+			["Callback"] = function(Toggled)
+				print(Toggled)
+			end,
+		},
+	}, Enum.KeyCode.X)
+	
+	Library.addModule("Movement", "Jump Power", function(Toggled)
+		game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = Toggled and 200 or 50
+	end)
+	
+	Library.addModule("Render", "ModuleList", function(Toggled)
+		Library.ModuleList.Visible = Toggled
+	end, {}, nil, true)
+	
+	Library.addModule("Render", "MobileButton", function(Toggled)
+		Library.MobileButton.Visible = Toggled
+	end, {}, nil, true)
 
 	return Library
 end;
-local lib = C_3();
 
-return lib;
+return C_3();

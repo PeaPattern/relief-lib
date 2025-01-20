@@ -978,47 +978,6 @@ local script = G2L["3"];
 	
 	Library.ModuleList = ModuleList
 	Library.MobileButton = MobileButton
-	
-	Library.addCategory("Movement", "rbxassetid://1114393432")
-	Library.addCategory("Combat", "rbxassetid://7485051715")
-	Library.addCategory("Render", "rbxassetid://13321848320")
-	Library.addCategory("Exploit", "rbxassetid://7562374548")
-	Library.addCategory("Player", "rbxassetid://16149111731")
-	Library.addCategory("World", "rbxassetid://17640958405")
-	Library.addCategory("Misc", "rbxassetid://1538581893")
-	
-	local SpeedAmount = 50
-	Library.addModule("Movement", "Speed", function(Toggled)
-		game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = Toggled and SpeedAmount or 16
-	end, {
-		{
-			["Type"] = "TextBox",
-			["Title"] = "title test",
-			["Placeholder"] = "placeholder",
-			["Callback"] = function(Text)
-				SpeedAmount = tonumber(Text) or 16
-			end,
-		},
-		{
-			["Type"] = "Toggle",
-			["Title"] = "toggle test",
-			["Callback"] = function(Toggled)
-				print(Toggled)
-			end,
-		},
-	}, Enum.KeyCode.X)
-	
-	Library.addModule("Movement", "Jump Power", function(Toggled)
-		game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = Toggled and 200 or 50
-	end)
-	
-	Library.addModule("Render", "ModuleList", function(Toggled)
-		Library.ModuleList.Visible = Toggled
-	end, {}, nil, true)
-	
-	Library.addModule("Render", "MobileButton", function(Toggled)
-		Library.MobileButton.Visible = Toggled
-	end, {}, nil, true)
 
 	return Library
 end;

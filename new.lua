@@ -844,7 +844,7 @@ local script = G2L["3"];
 			end)
 		end
 
-		if SettingConfig == {} then
+		if not SettingConfig or SettingConfig == {} then
 			Expand.Visible = false
 		else
 			Connections[#Connections + 1] = NewModule.InputBegan:Connect(function(input)

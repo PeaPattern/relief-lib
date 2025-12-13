@@ -844,41 +844,42 @@ local script = G2L["3"];
 			end)
 		end
 
-		if not SettingConfig or #SettingConfig == 0 then
+		local isSettings = not SettingConfig or #SettingConfig == 0
+		if isSettings then
 			Expand.Visible = false
-		else
-			Connections[#Connections + 1] = NewModule.InputBegan:Connect(function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton2 then
-					SettingToggle = not SettingToggle
-					Settings.Visible = SettingToggle
-					Seperator.Visible = SettingToggle
-					if SettingToggle then
-						NewSettings.Parent = Modules
-						NewSettings.Name = NewModule.Name .. "a"
-						Expand.Rotation = 0
-					else
-						NewSettings.Parent = nil
-						Expand.Rotation = -90
-					end
-				end
-				
-				if Toggle then
-					if input.UserInputType == Enum.UserInputType.MouseMovement then
-						playSound(script.hover)
-						EnabledHoverTween:Play()
-					elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-						toggleModule()
-					end
-				else
-					if input.UserInputType == Enum.UserInputType.MouseMovement then
-						playSound(script.hover)
-						HoverTween:Play()
-					elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-						toggleModule()
-					end
-				end
-			end)
 		end
+
+		Connections[#Connections + 1] = NewModule.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton2 and not isSettings then
+				SettingToggle = not SettingToggle
+				Settings.Visible = SettingToggle
+				Seperator.Visible = SettingToggle
+				if SettingToggle then
+					NewSettings.Parent = Modules
+					NewSettings.Name = NewModule.Name .. "a"
+					Expand.Rotation = 0
+				else
+					NewSettings.Parent = nil
+					Expand.Rotation = -90
+				end
+			end
+			
+			if Toggle then
+				if input.UserInputType == Enum.UserInputType.MouseMovement then
+					playSound(script.hover)
+					EnabledHoverTween:Play()
+				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+					toggleModule()
+				end
+			else
+				if input.UserInputType == Enum.UserInputType.MouseMovement then
+					playSound(script.hover)
+					HoverTween:Play()
+				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+					toggleModule()
+				end
+			end
+		end)
 	
 		Connections[#Connections + 1] = NewModule.InputEnded:Connect(function(input)
 			if not Toggle and input.UserInputType == Enum.UserInputType.MouseMovement then

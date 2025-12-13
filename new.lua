@@ -819,12 +819,10 @@ local script = G2L["3"];
 		local SettingToggle = false
 		
 		local function toggleModule()
-			playSound(script.click)
 			Toggle = not Toggle
 			Callback(Toggle)
 			NewList.Visible = Toggle
 			if Toggle then
-				playSound(script.hover)
 				EnabledHoverTween:Play()
 			else
 				UnhoverTween:Play()

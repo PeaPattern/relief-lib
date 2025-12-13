@@ -983,6 +983,16 @@ local script = G2L["3"];
 			end
 		end
 	end
+
+	Library.getModule = function(Query)
+		for _, Category in Categories do
+			for _, Module in Category.Modules do
+				if Module.Name == Query then
+					return Module
+				end
+			end
+		end
+	end
 	
 	Library.KillScript = function()
 		Screen:Destroy()

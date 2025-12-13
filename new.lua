@@ -834,15 +834,21 @@ local script = G2L["3"];
 		if Default then
 			toggleModule()
 		end
+
+		local Tree = {
+			["Name"] = Name,
+			["Callback"] = Callback,
+			["Env"] = {},
+			["Keybind"] = Keybind or nil,
+			["UI"] = NewModule
+		}
 		
-		if KeyBind then
-			UserInputService.InputBegan:Connect(function(Input, GPE)
-				if GPE then return end
-				if Input.KeyCode == KeyBind then
-					toggleModule()
-				end
-			end)
-		end
+		UserInputService.InputBegan:Connect(function(Input, GPE)
+			if GPE or not Tree.Keybind then return end
+			if Input.KeyCode == Tree.Keybind then
+				toggleModule()
+			end
+		end)
 
 		local isSettings = not SettingConfig or #SettingConfig == 0
 		if isSettings then
@@ -947,12 +953,7 @@ local script = G2L["3"];
 		end
 		NewSettings.Parent = nil
 	
-		CategoryInfo["Modules"][#CategoryInfo["Modules"] + 1] = {
-			["Name"] = Name,
-			["Callback"] = Callback,
-			["Env"] = {},
-			["UI"] = NewModule
-		}
+		CategoryInfo["Modules"][#CategoryInfo["Modules"] + 1] = Tree
 	end
 	
 	Library.getEnv = function(Category, Name)
@@ -969,6 +970,16 @@ local script = G2L["3"];
 		for _, ModuleInfo in pairs(CategoryInfo["Modules"]) do
 			if ModuleInfo["Name"] == Name then
 				ModuleInfo["Env"] = New
+			end
+		end
+	end
+
+	Library.setKeybind = function(Category, Query, Keybind)
+		local CategoryInfo = Library.getCategory(Category)
+		for _, Module in CategoryInfo.Modules do
+			if Module.Name == Query then
+				Module.Keybind = Keybind
+				break
 			end
 		end
 	end

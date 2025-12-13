@@ -839,7 +839,7 @@ local script = G2L["3"];
 			["Name"] = Name,
 			["Callback"] = Callback,
 			["Env"] = {},
-			["Keybind"] = Keybind or nil,
+			["Keybind"] = KeyBind or nil,
 			["UI"] = NewModule
 		}
 		
@@ -987,7 +987,7 @@ local script = G2L["3"];
 	Library.getModule = function(Query)
 		for _, Category in Categories do
 			for _, Module in Category.Modules do
-				if Module.Name == Query then
+				if Module.Name:lower() == Query:lower() then
 					return Module
 				end
 			end

@@ -286,7 +286,7 @@ G2L["20"]["Name"] = [[Seperator]];
 
 -- StarterGui.Screen.ClickGui.LocalScript.Category.modulesFix
 G2L["21"] = Instance.new("CanvasGroup", G2L["1f"]);
-G2L["21"]["GroupTransparency"] = 0.30000001192092896;
+G2L["21"]["GroupTransparency"] = 0.15;
 G2L["21"]["BorderSizePixel"] = 0;
 G2L["21"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["21"]["BackgroundTransparency"] = 1;
@@ -318,7 +318,7 @@ G2L["24"]["CornerRadius"] = UDim.new(0.05000000074505806, 0);
 
 -- StarterGui.Screen.ClickGui.LocalScript.Category.tabFix
 G2L["25"] = Instance.new("CanvasGroup", G2L["1f"]);
-G2L["25"]["GroupTransparency"] = 0.20000000298023224;
+G2L["25"]["GroupTransparency"] = 0.15;
 G2L["25"]["BorderSizePixel"] = 0;
 G2L["25"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["25"]["BackgroundTransparency"] = 1;
@@ -336,7 +336,7 @@ G2L["26"]["Name"] = [[Tab]];
 
 -- StarterGui.Screen.ClickGui.LocalScript.Category.tabFix.Tab.UICorner
 G2L["27"] = Instance.new("UICorner", G2L["26"]);
-G2L["27"]["CornerRadius"] = UDim.new(0.20000000298023224, 0);
+G2L["27"]["CornerRadius"] = UDim.new(0.15, 0);
 
 -- StarterGui.Screen.ClickGui.LocalScript.Category.tabFix.Fix
 G2L["28"] = Instance.new("Frame", G2L["25"]);
@@ -387,7 +387,7 @@ G2L["2c"]["TextWrapped"] = true;
 G2L["2c"]["BorderSizePixel"] = 0;
 G2L["2c"]["TextScaled"] = true;
 G2L["2c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["2c"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["2c"]["Font"] = Enum.Font.Merriweather
 G2L["2c"]["TextSize"] = 14;
 G2L["2c"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["2c"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
@@ -396,7 +396,7 @@ G2L["2c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2c"]["Text"] = [[-]];
 G2L["2c"]["Name"] = [[Expand]];
 G2L["2c"]["BackgroundTransparency"] = 1;
-G2L["2c"]["Position"] = UDim2.new(0.9120174050331116, 0, 0.4941079020500183, 0);
+G2L["2c"]["Position"] = UDim2.new(0.9120174050331116, 0, 0.5, 0);
 
 -- StarterGui.Screen.ClickGui.LocalScript.Category.Tab.Icon
 G2L["2d"] = Instance.new("ImageLabel", G2L["29"]);
@@ -416,7 +416,7 @@ G2L["2e"] = Instance.new("UIAspectRatioConstraint", G2L["2d"]);
 
 -- StarterGui.Screen.ClickGui.LocalScript.Category.Tab.UICorner
 G2L["2f"] = Instance.new("UICorner", G2L["29"]);
-G2L["2f"]["CornerRadius"] = UDim.new(0.20000000298023224, 0);
+G2L["2f"]["CornerRadius"] = UDim.new(0.15, 0);
 
 -- StarterGui.Screen.ClickGui.LocalScript.Category.Modules
 G2L["30"] = Instance.new("Frame", G2L["1f"]);
@@ -430,7 +430,7 @@ G2L["30"]["Name"] = [[Modules]];
 
 -- StarterGui.Screen.ClickGui.LocalScript.Category.Modules.UICorner
 G2L["31"] = Instance.new("UICorner", G2L["30"]);
-G2L["31"]["CornerRadius"] = UDim.new(0.05000000074505806, 0);
+G2L["31"]["CornerRadius"] = UDim.new(0.05, 0);
 
 -- StarterGui.Screen.ClickGui.LocalScript.Category.Modules.UIListLayout
 G2L["32"] = Instance.new("UIListLayout", G2L["30"]);

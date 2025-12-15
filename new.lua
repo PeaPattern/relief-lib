@@ -9,6 +9,8 @@
 
 -- Instances: 64 | Scripts: 1 | Modules: 0
 local G2L = {};
+local Recolorable = {}
+local ThemeColor = Color3.fromRGB(75, 156, 255)
 
 -- StarterGui.Screen
 G2L["1"] = Instance.new("ScreenGui", game:GetService("CoreGui"));
@@ -540,13 +542,14 @@ G2L["3e"]["TextScaled"] = true;
 G2L["3e"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["3e"]["TextSize"] = 14;
 G2L["3e"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["3e"]["TextColor3"] = Color3.fromRGB(75, 156, 255);
+G2L["3e"]["TextColor3"] = ThemeColor;
 G2L["3e"]["Size"] = UDim2.new(0.03139931336045265, 0, 0.07139692455530167, 0);
 G2L["3e"]["Name"] = [[MobileButton]];
 G2L["3e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["3e"]["Text"] = [[-]];
 G2L["3e"]["Position"] = UDim2.new(0.4841540455818176, 0, 0.022172948345541954, 0);
 G2L["3e"]["BackgroundTransparency"] = 0.20000000298023224;
+table.insert(Recolorable, G2L["3e"])
 
 -- StarterGui.Screen.MobileButton.UIAspectRatioConstraint
 G2L["3f"] = Instance.new("UIAspectRatioConstraint", G2L["3e"]);
@@ -758,6 +761,9 @@ local script = G2L["3"];
 	
 	Library.addCategory = function(Name, Icon)
 		local NewCategory = ExampleCategory:Clone()
+		NewCategory.Seperator.BackgroundColor3 = ThemeColor
+		table.insert(Recolorable, NewCategory.Seperator)
+		
 		local Tab = NewCategory.Tab
 		local Modules = NewCategory.Modules
 		local Title = Tab.Title
@@ -820,6 +826,9 @@ local script = G2L["3"];
 
 		for _, item in ipairs(ActiveModules) do
 			local NewList = ExampleList:Clone()
+			NewList.Bar.BackgroundColor3 = ThemeColor
+			table.insert(Recolorable, NewList.Bar)
+			
 			NewList.Parent = ModuleList
 			NewList.Title.Text = item.Module.Name
 			NewList.Title.TextSize = 20
@@ -837,6 +846,8 @@ local script = G2L["3"];
 		local Expand = NewModule.Expand
 		local Title = NewModule.Title
 		local NewSettings = ExampleSettings:Clone()
+		table.insert(Recolorable, NewSettings.Seperator)
+		
 		local Settings = NewSettings.SF
 		local Seperator = NewSettings.Seperator
 		
@@ -1024,6 +1035,18 @@ local script = G2L["3"];
 		if not Module then return end
 
 		return Module.Toggle
+	end
+
+	Library.Recolor = function(NewColor)
+		ThemeColor = NewColor
+		for _, Inst in Recolorable do
+			if Inst:IsA("TextLabel") or Inst:IsA("TextButton") or Inst:IsA("ImageLabel") then
+				Inst.TextColor3 = NewColor
+			end
+			if Inst:IsA("Frame") then
+				Inst.BackgroundColor3 = NewColor
+			end
+		end
 	end
 	
 	Library.ModuleList = ModuleList

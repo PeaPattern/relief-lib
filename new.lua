@@ -474,10 +474,10 @@ G2L["35"]["Position"] = UDim2.new(0, 4, 0, 0);
 
 -- StarterGui.Screen.ClickGui.LocalScript.List.Title.UIPadding
 G2L["36"] = Instance.new("UIPadding", G2L["35"]);
-G2L["36"]["PaddingTop"] = UDim.new(0.10000000149011612, 0);
-G2L["36"]["PaddingRight"] = UDim.new(0.10000000149011612, 0);
-G2L["36"]["PaddingBottom"] = UDim.new(0.10000000149011612, 0);
-G2L["36"]["PaddingLeft"] = UDim.new(0.10000000149011612, 0);
+G2L["36"]["PaddingTop"] = UDim.new(0.2, 0);
+G2L["36"]["PaddingRight"] = UDim.new(0.1, 0);
+G2L["36"]["PaddingBottom"] = UDim.new(0.2, 0);
+G2L["36"]["PaddingLeft"] = UDim.new(0.1, 0);
 
 -- StarterGui.Screen.ClickGui.LocalScript.hover
 G2L["37"] = Instance.new("Sound", G2L["3"]);
@@ -576,6 +576,7 @@ local script = G2L["3"];
 	Library.enabledSfx = true
 	
 	local Blur = Instance.new("BlurEffect")
+	Blur.Name = "ReliefBlur"
 	Blur.Enabled = true
 	Blur.Parent = Lighting
 	Blur.Size = 10
@@ -796,7 +797,7 @@ local script = G2L["3"];
 		local NewList = ExampleList:Clone()
 		NewList.Parent = ModuleList
 		NewList.Title.Text = Name
-		NewList.Size = UDim2.new(0.07 * NewList.Title.Text:len(), 0, 0.03, 0)
+		NewList.Size = UDim2.new((0.05 * (NewList.Title.Text:len() + 1), 0, 0.03, 0)
 		NewList.Visible = false
 	
 		local NewModule = ExampleModule:Clone()

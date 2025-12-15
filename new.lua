@@ -886,7 +886,7 @@ local script = G2L["3"];
 			toggleModule()
 		end
 		
-		UserInputService.InputBegan:Connect(function(Input, GPE)
+		Connections[#Connections + 1] = UserInputService.InputBegan:Connect(function(Input, GPE)
 			if GPE or not Tree.Keybind then return end
 			if Input.KeyCode == Tree.Keybind then
 				toggleModule()

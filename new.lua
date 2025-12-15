@@ -954,34 +954,6 @@ local script = G2L["3"];
 	
 		CategoryInfo["Modules"][#CategoryInfo["Modules"] + 1] = Tree
 	end
-	
-	Library.getEnv = function(Category, Name)
-		local CategoryInfo = Library.getCategory(Category)
-		for _, ModuleInfo in pairs(CategoryInfo["Modules"]) do
-			if ModuleInfo["Name"] == Name then
-				return ModuleInfo["Env"]
-			end
-		end
-	end
-	
-	Library.setEnv = function(Category, Name, New)
-		local CategoryInfo = Library.getCategory(Category)
-		for _, ModuleInfo in pairs(CategoryInfo["Modules"]) do
-			if ModuleInfo["Name"] == Name then
-				ModuleInfo["Env"] = New
-			end
-		end
-	end
-
-	Library.setKeybind = function(Category, Query, Keybind)
-		local CategoryInfo = Library.getCategory(Category)
-		for _, Module in CategoryInfo.Modules do
-			if Module.Name == Query then
-				Module.Keybind = Keybind
-				break
-			end
-		end
-	end
 
 	Library.getModule = function(Query)
 		for _, Category in Categories do
@@ -991,6 +963,20 @@ local script = G2L["3"];
 				end
 			end
 		end
+	end
+
+	Library.setKeybind = function(Query, Keybind)
+		local Module = Library.getModule(Query)
+		if not Module then return end
+
+		Module.Keybind = Keybind
+	end
+
+	Library.getEnv = function(Query)
+		local Module = Library.getModule(Query)
+		if not Module then return end
+
+		return Module.Env
 	end
 	
 	Library.KillScript = function()

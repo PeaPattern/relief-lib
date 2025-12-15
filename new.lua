@@ -462,7 +462,7 @@ G2L["35"]["BorderSizePixel"] = 0;
 G2L["35"]["TextScaled"] = true;
 G2L["35"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["35"]["TextXAlignment"] = Enum.TextXAlignment.Right;
-G2L["35"]["FontFace"] = Font.new([[rbxasset://fonts/families/Ubuntu.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+G2L["35"]["Font"] = Enum.Font.Ubuntu
 G2L["35"]["TextSize"] = 14;
 G2L["35"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["35"]["Size"] = UDim2.new(0.9850442409515381, 0, 0.9999999403953552, 0);
@@ -474,10 +474,10 @@ G2L["35"]["Position"] = UDim2.new(0, 4, 0, 0);
 
 -- StarterGui.Screen.ClickGui.LocalScript.List.Title.UIPadding
 G2L["36"] = Instance.new("UIPadding", G2L["35"]);
-G2L["36"]["PaddingTop"] = UDim.new(0.2, 0);
-G2L["36"]["PaddingRight"] = UDim.new(0.1, 0);
-G2L["36"]["PaddingBottom"] = UDim.new(0.2, 0);
-G2L["36"]["PaddingLeft"] = UDim.new(0.1, 0);
+G2L["36"]["PaddingTop"] = UDim.new(0, 0);
+G2L["36"]["PaddingRight"] = UDim.new(0, 5);
+G2L["36"]["PaddingBottom"] = UDim.new(0, 5);
+G2L["36"]["PaddingLeft"] = UDim.new(0, 0);
 
 -- StarterGui.Screen.ClickGui.LocalScript.hover
 G2L["37"] = Instance.new("Sound", G2L["3"]);
@@ -788,17 +788,50 @@ local script = G2L["3"];
 			end
 		end
 	end
+
+	Library.renderModules = function()
+		for _, Frame in ModuleList:GetChildren() do
+			if Frame:IsA("Frame") then
+				Frame:Destroy()
+			end
+		end
+
+		local ActiveModules = {}
+		for _, Category in ipairs(Categories) do
+			for _, Module in ipairs(Category.Modules) do
+				if Module.Toggle then
+					local textSize = TextService:GetTextSize(
+						Module.Name,
+						20,
+						ExampleList.Title.Font,
+						Vector2.new(math.huge, 20)
+					)
+					table.insert(ActiveModules, {
+						Module = Module,
+						Width = textSize.X + 15 -- padding
+					})
+				end
+			end
+		end
+
+		table.sort(ActiveModules, function(a, b)
+			return a.Width < b.Width
+		end)
+
+		for _, item in ipairs(ActiveModules) do
+			local NewList = ExampleList:Clone()
+			NewList.Parent = ModuleList
+			NewList.Title.Text = item.Module.Name
+			NewList.Title.TextSize = 20
+			NewList.Size = UDim2.new(0, item.Width, 0, 25)
+			NewList.Visible = true
+		end
+	end
 	
 	Library.addModule = function(Category, Name, Callback, SettingConfig, KeyBind, Default)
 		local CategoryInfo = Library.getCategory(Category)
 		local CategoryUI = CategoryInfo["UI"]
 		local Modules = CategoryUI.Modules
-	
-		local NewList = ExampleList:Clone()
-		NewList.Parent = ModuleList
-		NewList.Title.Text = Name
-		NewList.Size = UDim2.new((0.05 * (NewList.Title.Text:len() + 1)), 0, 0.03, 0)
-		NewList.Visible = false
 	
 		local NewModule = ExampleModule:Clone()
 		local Expand = NewModule.Expand
@@ -830,7 +863,7 @@ local script = G2L["3"];
 		local function toggleModule()
 			Tree.Toggle = not Tree.Toggle
 			Callback(Tree.Toggle)
-			NewList.Visible = Tree.Toggle
+			Library.renderModules()
 			if Tree.Toggle then
 				EnabledHoverTween:Play()
 			else

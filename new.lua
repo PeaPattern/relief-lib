@@ -837,6 +837,7 @@ local script = G2L["3"];
 			["Name"] = Name,
 			["Callback"] = Callback,
 			["Env"] = {},
+			["Toggled"] = Toggle,
 			["Keybind"] = KeyBind or nil,
 			["UI"] = NewModule
 		}
@@ -998,6 +999,13 @@ local script = G2L["3"];
 		for _, c in Connections do
 			c:Disconnect()
 		end
+	end
+
+	Library.isToggled = function(Query)
+		local Module = Library.getModule(Query)
+		if not Module then return end
+
+		return Module.Toggled
 	end
 	
 	Library.ModuleList = ModuleList

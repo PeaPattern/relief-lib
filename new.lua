@@ -243,7 +243,7 @@ G2L["1a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["1a"]["Name"] = [[Settings]];
 
 -- StarterGui.Screen.ClickGui.LocalScript.Settings.SF
-G2L["1b"] = Instance.new("ScrollingFrame", G2L["1a"]);
+G2L["1b"] = Instance.new("Frame", G2L["1a"]);
 G2L["1b"]["Active"] = true;
 G2L["1b"]["ZIndex"] = 4;
 G2L["1b"]["BorderSizePixel"] = 0;
@@ -251,15 +251,27 @@ G2L["1b"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["1b"]["BackgroundTransparency"] = 0.4000000059604645;
 G2L["1b"]["Size"] = UDim2.new(1, 0, 0.8, 0);
 G2L["1b"]["Position"] = UDim2.new(0, 0, 0.1, 0);
-G2L["1b"]["ScrollBarImageColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["1b"]["ClipsDescendants"] = false;
 G2L["1b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1b"]["Name"] = [[SF]];
-G2L["1b"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y;
-G2L["1b"]["CanvasSize"] = UDim2.new(0, 0, 0, 0)
+G2L["1b"]["Name"] = [[dacontainer]];
+
+local Settings_SF = Instance.new("ScrollingFrame", G2L["1b"]);
+Settings_SF["Active"] = true;
+Settings_SF["ZIndex"] = 4;
+Settings_SF["BorderSizePixel"] = 0;
+Settings_SF["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+Settings_SF["BackgroundTransparency"] = 1;
+Settings_SF["Size"] = UDim2.new(1, 0, 0.8, 0);
+Settings_SF["Position"] = UDim2.new(0, 0, 0.1, 0);
+Settings_SF["ScrollBarImageColor3"] = Color3.fromRGB(0, 0, 0);
+Settings_SF["ClipsDescendants"] = false;
+Settings_SF["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+Settings_SF["Name"] = [[SF]];
+Settings_SF["AutomaticCanvasSize"] = Enum.AutomaticSize.Y;
+Settings_SF["CanvasSize"] = UDim2.new(0, 0, 0, 0)
 
 -- StarterGui.Screen.ClickGui.LocalScript.Settings.SF.UIListLayout
-G2L["1c"] = Instance.new("UIListLayout", G2L["1b"]);
+G2L["1c"] = Instance.new("UIListLayout", Settings_SF);
 G2L["1c"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
 G2L["1c"]["Padding"] = UDim.new(0, 5);
 G2L["1c"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
@@ -591,21 +603,12 @@ local script = G2L["3"];
 	local Connections = {}
 	local Library = {}
 	Library.Keybinds = {Enum.KeyCode.LeftAlt, Enum.KeyCode.RightAlt}
-	Library.enabledSfx = true
 	
 	local Blur = Instance.new("BlurEffect")
 	Blur.Name = "ReliefBlur"
 	Blur.Enabled = true
 	Blur.Parent = Lighting
 	Blur.Size = 10
-	
-	local function playSound(sound: Sound)
-		if not Library.enabledSfx then return end
-		local sfx = sound:Clone()
-		sfx.PlayOnRemove = true
-		sfx.Parent = workspace
-		sfx:Destroy()
-	end
 	
 	MobileButton.MouseButton1Down:Connect(function()
 		ClickGui.Visible = not ClickGui.Visible
@@ -862,7 +865,7 @@ local script = G2L["3"];
 		local NewSettings = ExampleSettings:Clone()
 		table.insert(Recolorable, NewSettings.Seperator)
 		
-		local Settings = NewSettings.SF
+		local Settings = NewSettings.dacontainer
 		local Seperator = NewSettings.Seperator
 		
 		NewModule.Name = "Module" .. #CategoryInfo["Modules"]
@@ -955,7 +958,7 @@ local script = G2L["3"];
 				local _T = Config["Type"]
 				if _T == "TextBox" then
 					local NewTextBox = ExampleTBSetting:Clone()
-					NewTextBox.Parent = Settings
+					NewTextBox.Parent = Settings.SF
 					NewTextBox.TextBox.PlaceholderText = Config["Placeholder"]
 					NewTextBox.Title.Text = Config["Title"]
 	
@@ -964,7 +967,7 @@ local script = G2L["3"];
 					end)
 				elseif _T == "Toggle" then
 					local NewToggle = ExampleToggle:Clone()
-					NewToggle.Parent = Settings
+					NewToggle.Parent = Settings.SF
 					NewToggle.Title.Text = Config["Title"]
 	
 					local Bar = NewToggle.Bar

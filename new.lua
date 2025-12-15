@@ -870,14 +870,12 @@ local script = G2L["3"];
 			
 			if Tree.Toggle then
 				if input.UserInputType == Enum.UserInputType.MouseMovement then
-					playSound(script.hover)
 					EnabledHoverTween:Play()
 				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 					toggleModule()
 				end
 			else
 				if input.UserInputType == Enum.UserInputType.MouseMovement then
-					playSound(script.hover)
 					HoverTween:Play()
 				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 					toggleModule()

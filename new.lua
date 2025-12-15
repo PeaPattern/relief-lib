@@ -89,7 +89,7 @@ G2L["9"] = Instance.new("Frame", G2L["3"]);
 G2L["9"]["BorderSizePixel"] = 0;
 G2L["9"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["9"]["BackgroundTransparency"] = 1;
-G2L["9"]["Size"] = UDim2.new(0.800000011920929, 0, 0.20000000298023224, 0);
+G2L["9"]["Size"] = UDim2.new(0.8, 0, 0, 50);
 G2L["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["9"]["Name"] = [[ToggleSetting]];
 
@@ -103,7 +103,7 @@ G2L["a"]["TextXAlignment"] = Enum.TextXAlignment.Left;
 G2L["a"]["FontFace"] = Font.new([[rbxasset://fonts/families/Ubuntu.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 G2L["a"]["TextSize"] = 14;
 G2L["a"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["a"]["Size"] = UDim2.new(0.699999988079071, 0, 1, 0);
+G2L["a"]["Size"] = UDim2.new(0.7, 0, 25, 0);
 G2L["a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["a"]["Text"] = [[toggle]];
 G2L["a"]["Name"] = [[Title]];
@@ -166,11 +166,18 @@ G2L["12"] = Instance.new("UIAspectRatioConstraint", G2L["d"]);
 G2L["12"]["AspectRatio"] = 2.156613349914551;
 
 -- StarterGui.Screen.ClickGui.LocalScript.ToggleSetting.UIAspectRatioConstraint
+--[[
 G2L["13"] = Instance.new("UIAspectRatioConstraint", G2L["9"]);
 G2L["13"]["AspectRatio"] = 5.750968933105469;
+]]
 
 -- StarterGui.Screen.ClickGui.LocalScript.TextBoxSetting
-G2L["14"] = Instance.new("TextBox", G2L["3"]);
+local Frame = Instance.new("Frame", G2L["3"])
+Frame.BackgroundTransparency = 1
+Frame.Size = UDim2.new(0.8, 0, 0, 50)
+Frame.Name = "TextBoxSetting"
+
+G2L["14"] = Instance.new("TextBox", Frame);
 G2L["14"]["BorderSizePixel"] = 0;
 G2L["14"]["TextSize"] = 14;
 G2L["14"]["TextXAlignment"] = Enum.TextXAlignment.Left;
@@ -181,11 +188,13 @@ G2L["14"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["14"]["FontFace"] = Font.new([[rbxasset://fonts/families/Ubuntu.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 G2L["14"]["BackgroundTransparency"] = 0.5;
 G2L["14"]["PlaceholderText"] = [[amount]];
-G2L["14"]["Size"] = UDim2.new(0.800000011920929, 0, 0.20000000298023224, 0);
+G2L["14"]["Size"] = UDim2.new(0.8, 0, 0, 50);
 G2L["14"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["14"]["Text"] = [[]];
 G2L["14"]["Position"] = UDim2.new(-0.024186693131923676, 0, 1.2728186504773475e-07, 0);
-G2L["14"]["Name"] = [[TextBoxSetting]];
+G2L["14"]["Name"] = [[TextBox]];
+G2L["14"].Size = UDim2.new(1, 0, 0.75, 0)
+G2L["14"].Position = UDim2.new(0, 0, 0.25, 0)
 
 -- StarterGui.Screen.ClickGui.LocalScript.TextBoxSetting.UICorner
 G2L["15"] = Instance.new("UICorner", G2L["14"]);
@@ -199,11 +208,13 @@ G2L["16"]["PaddingBottom"] = UDim.new(0.20000000298023224, 0);
 G2L["16"]["PaddingLeft"] = UDim.new(0.10000000149011612, 0);
 
 -- StarterGui.Screen.ClickGui.LocalScript.TextBoxSetting.UIAspectRatioConstraint
+--[[
 G2L["17"] = Instance.new("UIAspectRatioConstraint", G2L["14"]);
 G2L["17"]["AspectRatio"] = 5.750968933105469;
+]]
 
 -- StarterGui.Screen.ClickGui.LocalScript.Title
-G2L["18"] = Instance.new("TextLabel", G2L["3"]);
+G2L["18"] = Instance.new("TextLabel", Frame);
 G2L["18"]["TextWrapped"] = true;
 G2L["18"]["BorderSizePixel"] = 0;
 G2L["18"]["TextScaled"] = true;
@@ -212,7 +223,7 @@ G2L["18"]["TextXAlignment"] = Enum.TextXAlignment.Left;
 G2L["18"]["FontFace"] = Font.new([[rbxasset://fonts/families/Ubuntu.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 G2L["18"]["TextSize"] = 14;
 G2L["18"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["18"]["Size"] = UDim2.new(0.800000011920929, 0, 0.10000000149011612, 0);
+G2L["18"]["Size"] = UDim2.new(1, 0, 0.2, 0);
 G2L["18"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["18"]["Text"] = [[Speed Setting]];
 G2L["18"]["Name"] = [[Title]];
@@ -237,13 +248,14 @@ G2L["1b"]["Active"] = true;
 G2L["1b"]["ZIndex"] = 4;
 G2L["1b"]["BorderSizePixel"] = 0;
 G2L["1b"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1b"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y;
 G2L["1b"]["BackgroundTransparency"] = 0.4000000059604645;
 G2L["1b"]["Size"] = UDim2.new(1, 0, 1, 0);
 G2L["1b"]["ScrollBarImageColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["1b"]["ClipsDescendants"] = false;
 G2L["1b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["1b"]["Name"] = [[SF]];
+G2L["1b"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y;
+G2L["1b"]["CanvasSize"] = UDim2.new(0, 0, 0, 0)
 
 -- StarterGui.Screen.ClickGui.LocalScript.Settings.SF.UIListLayout
 G2L["1c"] = Instance.new("UIListLayout", G2L["1b"]);
@@ -252,9 +264,11 @@ G2L["1c"]["Padding"] = UDim.new(0, 5);
 G2L["1c"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
 
 -- StarterGui.Screen.ClickGui.LocalScript.Settings.SF.UIPadding
+--[[
 G2L["1d"] = Instance.new("UIPadding", G2L["1b"]);
 G2L["1d"]["PaddingTop"] = UDim.new(0.10000000149011612, 0);
 G2L["1d"]["PaddingBottom"] = UDim.new(0.10000000149011612, 0);
+]]
 
 -- StarterGui.Screen.ClickGui.LocalScript.Settings.Seperator
 G2L["1e"] = Instance.new("Frame", G2L["1a"]);
@@ -625,7 +639,6 @@ local script = G2L["3"];
 	local ExampleModule = script.Module
 	local ExampleList = script.List
 	local ExampleTBSetting = script.TextBoxSetting
-	local ExampleTitle = script.Title
 	local ExampleToggle = script.ToggleSetting
 	local ExampleSettings = script.Settings
 	
@@ -809,7 +822,7 @@ local script = G2L["3"];
 					local textSize = TextService:GetTextSize(
 						Module.Name,
 						20,
-						ExampleList.Title.Font,
+						Enum.Font.Ubuntu,
 						Vector2.new(math.huge, 20)
 					)
 					table.insert(ActiveModules, {
@@ -939,16 +952,13 @@ local script = G2L["3"];
 			for _, Config in SettingConfig do
 				local _T = Config["Type"]
 				if _T == "TextBox" then
-					local NewTitle = ExampleTitle:Clone()
-					NewTitle.Parent = Settings
-					NewTitle.Text = Config["Title"]
-	
 					local NewTextBox = ExampleTBSetting:Clone()
 					NewTextBox.Parent = Settings
-					NewTextBox.PlaceholderText = Config["Placeholder"]
+					NewTextBox.TextBox.PlaceholderText = Config["Placeholder"]
+					NewTextBox.Title.Text = Config["Title"]
 	
-					Connections[#Connections + 1] = NewTextBox.FocusLost:Connect(function()
-						Config["Callback"](NewTextBox.Text)
+					Connections[#Connections + 1] = NewTextBox.TextBox.FocusLost:Connect(function()
+						Config["Callback"](NewTextBox.Title.Text)
 					end)
 				elseif _T == "Toggle" then
 					local NewToggle = ExampleToggle:Clone()

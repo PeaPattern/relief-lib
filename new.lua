@@ -815,13 +815,21 @@ local script = G2L["3"];
 		local UnhoverTween = TweenService:Create(Title, TInfo, { TextColor3 = Color3.fromRGB(255, 255, 255) })
 		local EnabledHoverTween = TweenService:Create(Title, TInfo, { TextColor3 = Color3.fromRGB(74, 155, 255) })
 	
-		local Toggle = false
+		local Tree = {
+			["Name"] = Name,
+			["Callback"] = Callback,
+			["Env"] = {},
+			["Toggle"] = false,
+			["Keybind"] = KeyBind or nil,
+			["UI"] = NewModule
+		}
+		
 		local SettingToggle = false
 		
 		local function toggleModule()
-			Toggle = not Toggle
-			Callback(Toggle)
-			NewList.Visible = Toggle
+			Tree.Toggle = not Tree.Toggle
+			Callback(Tree.Toggle)
+			NewList.Visible = Tree.Toggle
 			if Toggle then
 				EnabledHoverTween:Play()
 			else
@@ -832,15 +840,6 @@ local script = G2L["3"];
 		if Default then
 			toggleModule()
 		end
-
-		local Tree = {
-			["Name"] = Name,
-			["Callback"] = Callback,
-			["Env"] = {},
-			["Toggled"] = Toggle,
-			["Keybind"] = KeyBind or nil,
-			["UI"] = NewModule
-		}
 		
 		UserInputService.InputBegan:Connect(function(Input, GPE)
 			if GPE or not Tree.Keybind then return end
@@ -869,7 +868,7 @@ local script = G2L["3"];
 				end
 			end
 			
-			if Toggle then
+			if Tree.Toggle then
 				if input.UserInputType == Enum.UserInputType.MouseMovement then
 					playSound(script.hover)
 					EnabledHoverTween:Play()
@@ -887,7 +886,7 @@ local script = G2L["3"];
 		end)
 	
 		Connections[#Connections + 1] = NewModule.InputEnded:Connect(function(input)
-			if not Toggle and input.UserInputType == Enum.UserInputType.MouseMovement then
+			if not Tree.Toggle and input.UserInputType == Enum.UserInputType.MouseMovement then
 				UnhoverTween:Play()
 			end
 		end)
@@ -991,7 +990,7 @@ local script = G2L["3"];
 		local Module = Library.getModule(Query)
 		if not Module then return end
 
-		return Module.Toggled
+		return Module.Toggle
 	end
 	
 	Library.ModuleList = ModuleList

@@ -830,7 +830,7 @@ local script = G2L["3"];
 			Tree.Toggle = not Tree.Toggle
 			Callback(Tree.Toggle)
 			NewList.Visible = Tree.Toggle
-			if Toggle then
+			if Tree.Toggle then
 				EnabledHoverTween:Play()
 			else
 				UnhoverTween:Play()

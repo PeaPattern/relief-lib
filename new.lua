@@ -250,7 +250,7 @@ G2L["1b"]["BorderSizePixel"] = 0;
 G2L["1b"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["1b"]["BackgroundTransparency"] = 0.4000000059604645;
 G2L["1b"]["Size"] = UDim2.new(1, 0, 1, 0);
-G2L["1b"]["Position"] = UDim2.new(0, 0, 0.1, 0);
+G2L["1b"]["Position"] = UDim2.new(0, 0, 0, 0);
 G2L["1b"]["ClipsDescendants"] = false;
 G2L["1b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["1b"]["Name"] = [[dacontainer]];
@@ -1060,11 +1060,11 @@ local script = G2L["3"];
 		ThemeColor = NewColor
 		for _, Inst in Recolorable do
 			if Inst:IsA("TextLabel") or Inst:IsA("TextButton") or Inst:IsA("ImageLabel") then
-				if Inst.TextColor3 == Color3.fromRGB(255, 255, 255) then continue end
+				--if Inst.TextColor3 == Color3.fromRGB(255, 255, 255) then continue end
 				Inst.TextColor3 = NewColor
 			end
 			if Inst:IsA("Frame") then
-				if Inst.BackgroundColor3 == Color3.fromRGB(255, 255, 255) or Inst.BackgroundColor3 == Color3.fromRGB(166, 166, 166) then continue end
+				--if Inst.BackgroundColor3 == Color3.fromRGB(255, 255, 255) or Inst.BackgroundColor3 == Color3.fromRGB(166, 166, 166) then continue end
 				if Inst.Name == "Bar" then Inst.BackgroundColor3 = ApplyBrightnes(NewColor, 0.8) continue end
 				Inst.BackgroundColor3 = NewColor
 			end

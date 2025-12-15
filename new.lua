@@ -870,9 +870,10 @@ local script = G2L["3"];
 		Title.Text = Name
 	
 		local TInfo = TweenInfo.new(0.4, Enum.EasingStyle.Quint, Enum.EasingDirection.Out)
-		local HoverTween = TweenService:Create(Title, TInfo, { TextColor3 = Color3.fromRGB(74, 155, 255) })
+		local HoverTween = TweenService:Create(Title, TInfo, { TextColor3 = ThemeColor })
 		local UnhoverTween = TweenService:Create(Title, TInfo, { TextColor3 = Color3.fromRGB(255, 255, 255) })
-		local EnabledHoverTween = TweenService:Create(Title, TInfo, { TextColor3 = Color3.fromRGB(74, 155, 255) })
+		local EnabledHoverTween = TweenService:Create(Title, TInfo, { TextColor3 = ThemeColor })
+		table.insert(Recolorable, Title)
 	
 		local Tree = {
 			["Name"] = Name,
@@ -968,32 +969,32 @@ local script = G2L["3"];
 	
 					local Bar = NewToggle.Bar
 					local Button = Bar.Button
-	
-					local ButtonTweenIntro = TweenService:Create(Button, TInfo, {
-						BackgroundColor3 = Color3.fromRGB(74, 155, 255),
-						Position = UDim2.new(1, 0, 0.5, 0),
-					})
-					local BarTweenIntro = TweenService:Create(Bar, TInfo, {
-						BackgroundColor3 = Color3.fromRGB(62, 132, 218),
-					})
-	
-					local ButtonTweenOutro = TweenService:Create(Button, TInfo, {
-						BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-						Position = UDim2.new(0, 0, 0.5, 0),
-					})
-					local BarTweenOutro = TweenService:Create(Bar, TInfo, {
-						BackgroundColor3 = Color3.fromRGB(166, 166, 166),
-					})
+					table.insert(Recolorable, Button)
+					table.insert(Recolorable, Bar)
+
+					local function ApplyBrightness(Col, Amplitude)
+						return Color3.new(Col.R * Amplitude, Col.G * Amplitude, Col.B * Amplitude)
+					end
 	
 					local _Toggle = false
 					local function Toggled()
 						_Toggle = not _Toggle
 						if _Toggle then
-							ButtonTweenIntro:Play()
-							BarTweenIntro:Play()
+							TweenService:Create(Button, TInfo, {
+								BackgroundColor3 = ThemeColor,
+								Position = UDim2.new(1, 0, 0.5, 0),
+							}):Play()
+							TweenService:Create(Bar, TInfo, {
+								BackgroundColor3 = ApplyBrightness(ThemeColor, 0.8),
+							}):Play()
 						else
-							ButtonTweenOutro:Play()
-							BarTweenOutro:Play()
+							TweenService:Create(Button, TInfo, {
+								BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+								Position = UDim2.new(0, 0, 0.5, 0),
+							}):Play()
+							TweenService:Create(Bar, TInfo, {
+								BackgroundColor3 = Color3.fromRGB(166, 166, 166),
+							}):Play()
 						end
 						Config["Callback"](_Toggle)
 					end
@@ -1052,9 +1053,11 @@ local script = G2L["3"];
 		ThemeColor = NewColor
 		for _, Inst in Recolorable do
 			if Inst:IsA("TextLabel") or Inst:IsA("TextButton") or Inst:IsA("ImageLabel") then
+				if Inst.TextColor3 == Color3.fromRGB(255, 255, 255) then continue end
 				Inst.TextColor3 = NewColor
 			end
 			if Inst:IsA("Frame") then
+				if Inst.BackgroundColor3 == Color3.fromRGB(255, 255, 255) or Inst.BackgroundColor3 == Color3.fromRGB(166, 166, 166) then continue end
 				Inst.BackgroundColor3 = NewColor
 			end
 		end

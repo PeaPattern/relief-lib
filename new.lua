@@ -984,6 +984,7 @@ local script = G2L["3"];
 		NewSettings.Parent = nil
 	
 		CategoryInfo["Modules"][#CategoryInfo["Modules"] + 1] = Tree
+		Library.renderModules()
 	end
 
 	Library.getModule = function(Query)

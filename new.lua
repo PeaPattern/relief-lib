@@ -500,6 +500,7 @@ G2L["35"]["Text"] = [[Example]];
 G2L["35"]["Name"] = [[Title]];
 G2L["35"]["BackgroundTransparency"] = 0.4000000059604645;
 G2L["35"]["Position"] = UDim2.new(0, 4, 0, 0);
+G2L["35"].TextXAlignment = Enum.TextXAlignment.Right
 
 -- StarterGui.Screen.ClickGui.LocalScript.List.Title.UIPadding
 G2L["36"] = Instance.new("UIPadding", G2L["35"]);

@@ -504,9 +504,9 @@ G2L["35"].TextXAlignment = Enum.TextXAlignment.Right
 
 -- StarterGui.Screen.ClickGui.LocalScript.List.Title.UIPadding
 G2L["36"] = Instance.new("UIPadding", G2L["35"]);
-G2L["36"]["PaddingTop"] = UDim.new(0, 5);
+G2L["36"]["PaddingTop"] = UDim.new(0, 2);
 G2L["36"]["PaddingRight"] = UDim.new(0, 10);
-G2L["36"]["PaddingBottom"] = UDim.new(0, 5);
+G2L["36"]["PaddingBottom"] = UDim.new(0, 2);
 G2L["36"]["PaddingLeft"] = UDim.new(0, 0);
 
 -- StarterGui.Screen.ClickGui.LocalScript.hover
@@ -832,7 +832,7 @@ local script = G2L["3"];
 					)
 					table.insert(ActiveModules, {
 						Module = Module,
-						Width = textSize.X + 10
+						Width = textSize.X + 15
 					})
 				end
 			end

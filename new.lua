@@ -851,6 +851,7 @@ local script = G2L["3"];
 			NewList.Title.Text = item.Module.Name
 			NewList.Title.TextSize = 20
 			NewList.Size = UDim2.new(0, item.Width, 0, 25)
+			NewList.Position = UDim2.new(0, -5, 0, 0)
 			NewList.Visible = true
 		end
 	end

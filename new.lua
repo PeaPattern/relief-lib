@@ -1061,12 +1061,12 @@ local script = G2L["3"];
 				if Inst.TextColor3 ~= Color3.new(1, 1, 1) then
 					Inst.TextColor3 = NewColor
 				end
-				if Inst.BackgroundColor3 ~= Color3.new(0, 0, 0) then
+				if Inst.Name == "Bar" then Inst.BackgroundColor3 = ApplyBrightness(NewColor, 0.8) continue end
+				if Inst.BackgroundColor3 ~= Color3.new(0, 0, 0) and Inst.BackgroundColor3 ~= Color3.new(1, 1, 1) and Inst.BackgroundColor3 ~= Color3.fromRGB(166, 166, 166) then
 					Inst.BackgroundColor3 = NewColor
 				end
 			end
 			if Inst:IsA("Frame") then
-				if Inst.Name == "Bar" then Inst.BackgroundColor3 = ApplyBrightness(NewColor, 0.8) continue end
 				Inst.BackgroundColor3 = NewColor
 			end
 		end

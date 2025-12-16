@@ -832,7 +832,7 @@ local script = G2L["3"];
 					)
 					table.insert(ActiveModules, {
 						Module = Module,
-						Width = textSize.X + 15
+						Width = textSize.X + 10
 					})
 				end
 			end

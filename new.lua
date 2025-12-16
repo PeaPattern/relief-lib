@@ -108,7 +108,8 @@ G2L["a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["a"]["Text"] = [[toggle]];
 G2L["a"]["Name"] = [[Title]];
 G2L["a"]["BackgroundTransparency"] = 1;
-G2L["a"]["Position"] = UDim2.new(0.30000001192092896, 0, 0, 0);
+G2L["a"]["Position"] = UDim2.new(0.3, 0, 0.5, 0);
+G2L["a"].AnchorPoint = Vector2.new(0, 0.5)
 
 -- StarterGui.Screen.ClickGui.LocalScript.ToggleSetting.Title.UIPadding
 G2L["b"] = Instance.new("UIPadding", G2L["a"]);
@@ -490,7 +491,6 @@ G2L["35"]["TextWrapped"] = true;
 G2L["35"]["BorderSizePixel"] = 0;
 G2L["35"]["TextScaled"] = true;
 G2L["35"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["35"]["TextXAlignment"] = Enum.TextXAlignment.Right;
 G2L["35"]["Font"] = Enum.Font.Ubuntu
 G2L["35"]["TextSize"] = 14;
 G2L["35"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
@@ -831,7 +831,7 @@ local script = G2L["3"];
 					)
 					table.insert(ActiveModules, {
 						Module = Module,
-						Width = textSize.X + 15 -- padding
+						Width = textSize.X + 15
 					})
 				end
 			end
@@ -873,9 +873,6 @@ local script = G2L["3"];
 		Title.Text = Name
 	
 		local TInfo = TweenInfo.new(0.4, Enum.EasingStyle.Quint, Enum.EasingDirection.Out)
-		local HoverTween = TweenService:Create(Title, TInfo, { TextColor3 = ThemeColor })
-		local UnhoverTween = TweenService:Create(Title, TInfo, { TextColor3 = Color3.fromRGB(255, 255, 255) })
-		local EnabledHoverTween = TweenService:Create(Title, TInfo, { TextColor3 = ThemeColor })
 		table.insert(Recolorable, Title)
 	
 		local Tree = {
@@ -894,9 +891,9 @@ local script = G2L["3"];
 			Callback(Tree.Toggle)
 			Library.renderModules()
 			if Tree.Toggle then
-				EnabledHoverTween:Play()
+				TweenService:Create(Title, TInfo, { TextColor3 = ThemeColor }):Play()
 			else
-				UnhoverTween:Play()
+				TweenService:Create(Title, TInfo, { TextColor3 = Color3.fromRGB(255, 255, 255) }):Play()
 			end
 		end
 		
@@ -933,13 +930,13 @@ local script = G2L["3"];
 			
 			if Tree.Toggle then
 				if input.UserInputType == Enum.UserInputType.MouseMovement then
-					EnabledHoverTween:Play()
+					TweenService:Create(Title, TInfo, { TextColor3 = ThemeColor }):Play()
 				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 					toggleModule()
 				end
 			else
 				if input.UserInputType == Enum.UserInputType.MouseMovement then
-					HoverTween:Play()
+					TweenService:Create(Title, TInfo, { TextColor3 = ThemeColor }):Play()
 				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 					toggleModule()
 				end
@@ -948,7 +945,7 @@ local script = G2L["3"];
 	
 		Connections[#Connections + 1] = NewModule.InputEnded:Connect(function(input)
 			if not Tree.Toggle and input.UserInputType == Enum.UserInputType.MouseMovement then
-				UnhoverTween:Play()
+				TweenService:Create(Title, TInfo, { TextColor3 = Color3.fromRGB(255, 255, 255) }):Play()
 			end
 		end)
 		
@@ -963,7 +960,7 @@ local script = G2L["3"];
 					NewTextBox.Title.Text = Config["Title"]
 	
 					Connections[#Connections + 1] = NewTextBox.TextBox.FocusLost:Connect(function()
-						Config["Callback"](NewTextBox.Title.Text)
+						Config["Callback"](NewTextBox.TextBox.Text)
 					end)
 				elseif _T == "Toggle" then
 					local NewToggle = ExampleToggle:Clone()
@@ -1060,11 +1057,11 @@ local script = G2L["3"];
 		ThemeColor = NewColor
 		for _, Inst in Recolorable do
 			if Inst:IsA("TextLabel") or Inst:IsA("TextButton") or Inst:IsA("ImageLabel") then
-				--if Inst.TextColor3 == Color3.fromRGB(255, 255, 255) then continue end
+				if Inst.TextColor3 == Color3.new(1, 1, 1) then continue end
 				Inst.TextColor3 = NewColor
+				Inst.BackgroundColor3 = NewColor
 			end
 			if Inst:IsA("Frame") then
-				--if Inst.BackgroundColor3 == Color3.fromRGB(255, 255, 255) or Inst.BackgroundColor3 == Color3.fromRGB(166, 166, 166) then continue end
 				if Inst.Name == "Bar" then Inst.BackgroundColor3 = ApplyBrightness(NewColor, 0.8) continue end
 				Inst.BackgroundColor3 = NewColor
 			end

@@ -504,8 +504,8 @@ G2L["35"].TextXAlignment = Enum.TextXAlignment.Right
 
 -- StarterGui.Screen.ClickGui.LocalScript.List.Title.UIPadding
 G2L["36"] = Instance.new("UIPadding", G2L["35"]);
-G2L["36"]["PaddingTop"] = UDim.new(0, 0);
-G2L["36"]["PaddingRight"] = UDim.new(0, 5);
+G2L["36"]["PaddingTop"] = UDim.new(0, 5);
+G2L["36"]["PaddingRight"] = UDim.new(0, 10);
 G2L["36"]["PaddingBottom"] = UDim.new(0, 5);
 G2L["36"]["PaddingLeft"] = UDim.new(0, 0);
 
@@ -851,7 +851,6 @@ local script = G2L["3"];
 			NewList.Title.Text = item.Module.Name
 			NewList.Title.TextSize = 20
 			NewList.Size = UDim2.new(0, item.Width, 0, 25)
-			NewList.Position = UDim2.new(0, -5, 0, 0)
 			NewList.Visible = true
 		end
 	end

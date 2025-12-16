@@ -505,7 +505,7 @@ G2L["35"].TextXAlignment = Enum.TextXAlignment.Right
 -- StarterGui.Screen.ClickGui.LocalScript.List.Title.UIPadding
 G2L["36"] = Instance.new("UIPadding", G2L["35"]);
 G2L["36"]["PaddingTop"] = UDim.new(0, 2);
-G2L["36"]["PaddingRight"] = UDim.new(0, 2);
+G2L["36"]["PaddingRight"] = UDim.new(0, 4);
 G2L["36"]["PaddingBottom"] = UDim.new(0, 2);
 G2L["36"]["PaddingLeft"] = UDim.new(0, 0);
 

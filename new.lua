@@ -1057,9 +1057,12 @@ local script = G2L["3"];
 		ThemeColor = NewColor
 		for _, Inst in Recolorable do
 			if Inst:IsA("TextLabel") or Inst:IsA("TextButton") or Inst:IsA("ImageLabel") then
-				if Inst.TextColor3 == Color3.new(1, 1, 1) then continue end
-				Inst.TextColor3 = NewColor
-				Inst.BackgroundColor3 = NewColor
+				if Inst.TextColor3 ~= Color3.new(1, 1, 1) then
+					Inst.TextColor3 = NewColor
+				end
+				if Inst.BackgroundColor3 ~= Color3.new(0, 0, 0) then
+					Inst.BackgroundColor3 = NewColor
+				end
 			end
 			if Inst:IsA("Frame") then
 				if Inst.Name == "Bar" then Inst.BackgroundColor3 = ApplyBrightness(NewColor, 0.8) continue end

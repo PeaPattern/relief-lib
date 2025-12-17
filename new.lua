@@ -882,30 +882,29 @@ local script = G2L["3"];
 			["Env"] = {},
 			["Toggle"] = false,
 			["Keybind"] = KeyBind or nil,
-			["UI"] = NewModule
+			["UI"] = NewModule,
+			["ToggleFunction"] = function toggleModule()
+				Tree.Toggle = not Tree.Toggle
+				Callback(Tree.Toggle)
+				Library.renderModules()
+				if Tree.Toggle then
+					TweenService:Create(Title, TInfo, { TextColor3 = ThemeColor }):Play()
+				else
+					TweenService:Create(Title, TInfo, { TextColor3 = Color3.fromRGB(255, 255, 255) }):Play()
+				end
+			end
 		}
 		
 		local SettingToggle = false
 		
-		local function toggleModule()
-			Tree.Toggle = not Tree.Toggle
-			Callback(Tree.Toggle)
-			Library.renderModules()
-			if Tree.Toggle then
-				TweenService:Create(Title, TInfo, { TextColor3 = ThemeColor }):Play()
-			else
-				TweenService:Create(Title, TInfo, { TextColor3 = Color3.fromRGB(255, 255, 255) }):Play()
-			end
-		end
-		
 		if Default then
-			toggleModule()
+			Tree.ToggleFunction()
 		end
 		
 		Connections[#Connections + 1] = UserInputService.InputBegan:Connect(function(Input, GPE)
 			if GPE or not Tree.Keybind then return end
 			if Input.KeyCode == Tree.Keybind then
-				toggleModule()
+				Tree.ToggleFunction()
 			end
 		end)
 
@@ -933,13 +932,13 @@ local script = G2L["3"];
 				if input.UserInputType == Enum.UserInputType.MouseMovement then
 					TweenService:Create(Title, TInfo, { TextColor3 = ThemeColor }):Play()
 				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-					toggleModule()
+					Tree.ToggleFunction()
 				end
 			else
 				if input.UserInputType == Enum.UserInputType.MouseMovement then
 					TweenService:Create(Title, TInfo, { TextColor3 = ThemeColor }):Play()
 				elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-					toggleModule()
+					Tree.ToggleFunction()
 				end
 			end
 		end)
@@ -1068,6 +1067,34 @@ local script = G2L["3"];
 			end
 			if Inst:IsA("Frame") then
 				Inst.BackgroundColor3 = NewColor
+			end
+		end
+	end
+
+	local HttpService = game:GetService("HttpService")
+	makefolder("Relief")
+
+	Library.Save = function(Name)
+		local FileName = "Relief/" .. Name
+		if not isfile(FileName) then
+			writefile(FileName)
+		end
+
+		local Data = HttpService:JSONEncode(Categories)
+		appendfile(FileName, Data)
+	end
+
+	Library.Load = function(Name)
+		local FileName = "Relief/" .. Name
+		if not isfile(FileName) then return end
+
+		local SavedCategories = HttpService:JSONDecode(readfile(FileName))
+		for _, SavedCategory in SavedCategories do
+			for _, SavedModule in SavedCategory.Modules do
+				local Module = Categories[SavedModule.Name]
+				if SavedModule.Toggle then
+					Module.ToggleFunction()
+				end
 			end
 		end
 	end

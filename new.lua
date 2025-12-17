@@ -883,17 +883,18 @@ local script = G2L["3"];
 			["Toggle"] = false,
 			["Keybind"] = KeyBind or nil,
 			["UI"] = NewModule,
-			["ToggleFunction"] = function()
-				Tree.Toggle = not Tree.Toggle
-				Callback(Tree.Toggle)
-				Library.renderModules()
-				if Tree.Toggle then
-					TweenService:Create(Title, TInfo, { TextColor3 = ThemeColor }):Play()
-				else
-					TweenService:Create(Title, TInfo, { TextColor3 = Color3.fromRGB(255, 255, 255) }):Play()
-				end
-			end
 		}
+
+		Tree["ToggleFunction"] = function()
+			Tree.Toggle = not Tree.Toggle
+			Callback(Tree.Toggle)
+			Library.renderModules()
+			if Tree.Toggle then
+				TweenService:Create(Title, TInfo, { TextColor3 = ThemeColor }):Play()
+			else
+				TweenService:Create(Title, TInfo, { TextColor3 = Color3.fromRGB(255, 255, 255) }):Play()
+			end
+		end
 		
 		local SettingToggle = false
 		
@@ -1075,25 +1076,24 @@ local script = G2L["3"];
 	makefolder("Relief")
 
 	Library.Save = function(Name)
-		local FileName = "Relief/" .. Name
-		if not isfile(FileName) then
-			writefile(FileName)
-		end
-
+		local FileName = "Relief/" .. Name .. ".json"
 		local Data = HttpService:JSONEncode(Categories)
-		appendfile(FileName, Data)
+
+		writefile(FileName, Data)
 	end
 
 	Library.Load = function(Name)
-		local FileName = "Relief/" .. Name
+		local FileName = "Relief/" .. Name .. ".json"
 		if not isfile(FileName) then return end
 
 		local SavedCategories = HttpService:JSONDecode(readfile(FileName))
 		for _, SavedCategory in SavedCategories do
 			for _, SavedModule in SavedCategory.Modules do
-				local Module = Categories[SavedModule.Name]
-				if SavedModule.Toggle then
-					Module.ToggleFunction()
+				if SavedModule.Name == "KillScript" then continue end
+				
+				local Module = Library.getModule(SavedModule.Name)
+				if SavedModule["Toggle"] then
+					Module["ToggleFunction"]()
 				end
 			end
 		end

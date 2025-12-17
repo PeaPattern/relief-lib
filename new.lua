@@ -883,7 +883,7 @@ local script = G2L["3"];
 			["Toggle"] = false,
 			["Keybind"] = KeyBind or nil,
 			["UI"] = NewModule,
-			["ToggleFunction"] = function toggleModule()
+			["ToggleFunction"] = function()
 				Tree.Toggle = not Tree.Toggle
 				Callback(Tree.Toggle)
 				Library.renderModules()

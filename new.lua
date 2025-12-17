@@ -883,6 +883,7 @@ local script = G2L["3"];
 			["Toggle"] = false,
 			["Keybind"] = KeyBind or nil,
 			["UI"] = NewModule,
+			["Default"] = Default,
 		}
 
 		Tree["ToggleFunction"] = function()
@@ -1101,7 +1102,7 @@ local script = G2L["3"];
 				if SavedModule.Name == "KillScript" then continue end
 				
 				local Module = Library.getModule(SavedModule.Name)
-				if SavedModule["Toggle"] then
+				if SavedModule["Toggle"] and not SavedModule["Default"] then
 					Module["ToggleFunction"]()
 				end
 			end

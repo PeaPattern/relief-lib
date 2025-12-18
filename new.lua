@@ -1089,6 +1089,7 @@ local script = G2L["3"];
 		local FileName = "Relief/" .. Name .. ".json"
 		local Data = HttpService:JSONEncode(Categories)
 
+		print(Data)
 		writefile(FileName, Data)
 	end
 

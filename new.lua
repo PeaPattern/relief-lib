@@ -1092,6 +1092,7 @@ local script = G2L["3"];
 		for _, Category in Categories do
 			for _, Module in Category.Modules do
 				Data[Module.Name] = {Module.Toggle}
+				warn("Saved", Module.Name, Module.Toggle)
 			end
 		end
 
@@ -1104,6 +1105,7 @@ local script = G2L["3"];
 
 		local Data = HttpService:JSONDecode(readfile(FileName))
 		for Name, Data in Data do
+			warn("Loaded", Name, Data)
 			local Toggled = Data[1]
 			if Name == "KillScript" then continue end
 			

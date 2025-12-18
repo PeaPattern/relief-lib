@@ -1037,19 +1037,19 @@ local script = G2L["3"];
 	end
 	
 	Library.KillScript = function()
-		Screen:Destroy()
-		Blur:Destroy()
-		
-		for _, c in Connections do
-			c:Disconnect()
-		end
-
 		for _, Category in Categories do
 			for _, Module in Category.Modules do
 				if Module.Toggle then
 					Module.ToggleFunction()
 				end
 			end
+		end
+		
+		Screen:Destroy()
+		Blur:Destroy()
+		
+		for _, c in Connections do
+			c:Disconnect()
 		end
 	end
 

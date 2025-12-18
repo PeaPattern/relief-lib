@@ -1090,6 +1090,10 @@ local script = G2L["3"];
 		local Data = {}
 
 		for _, Category in Categories do
+			print(Category.Name)
+		end
+
+		for _, Category in Categories do
 			for _, Module in Category.Modules do
 				Data[Module.Name] = {Module.Toggle}
 				warn("Saved", Module.Name, Module.Toggle)

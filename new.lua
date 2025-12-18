@@ -1102,7 +1102,7 @@ local script = G2L["3"];
 				if SavedModule.Name == "KillScript" then continue end
 				
 				local Module = Library.getModule(SavedModule.Name)
-				if not Module then continue end
+				if not Module then warn(SavedModule.Name) continue end
 				
 				if SavedModule["Toggle"] and not Module["Default"] then
 					Module["ToggleFunction"]()

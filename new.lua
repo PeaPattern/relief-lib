@@ -1087,29 +1087,33 @@ local script = G2L["3"];
 
 	Library.Save = function(Name)
 		local FileName = "Relief/" .. Name .. ".json"
-		local Data = HttpService:JSONEncode(Categories)
+		local Data = {}
 
-		print(Data)
-		writefile(FileName, Data)
+		for _, Category in Categories do
+			for _, Module in Category.Modules do
+				Data[Module.Name] = {Module.Toggle}
+			end
+		end
+
+		writefile(FileName, HttpService:JSONEncode(Data))
 	end
 
 	Library.Load = function(Name)
 		local FileName = "Relief/" .. Name .. ".json"
 		if not isfile(FileName) then return end
 
-		local SavedCategories = HttpService:JSONDecode(readfile(FileName))
-		for _, SavedCategory in SavedCategories do
-			for _, SavedModule in SavedCategory.Modules do
-				if SavedModule.Name == "KillScript" then continue end
-				
-				local Module = Library.getModule(SavedModule.Name)
-				if not Module then warn(SavedModule.Name) continue end
-				
-				if SavedModule["Toggle"] and not Module["Default"] then
-					Module["ToggleFunction"]()
-				elseif not SavedModule["Toggle"] and Module["Default"] then
-					Module["ToggleFunction"]()
-				end
+		local Data = HttpService:JSONDecode(readfile(FileName))
+		for Name, Data in Data do
+			local Toggled = Data[1]
+			if Name == "KillScript" then continue end
+			
+			local Module = Library.getModule(Name)
+			if not Module then warn(Name) continue end
+			
+			if Toggled and not Module["Default"] then
+				Module["ToggleFunction"]()
+			elseif not Toggled and Module["Default"] then
+				Module["ToggleFunction"]()
 			end
 		end
 	end

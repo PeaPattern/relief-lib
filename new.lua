@@ -1040,7 +1040,7 @@ local script = G2L["3"];
 		for _, Category in Categories do
 			for _, Module in Category.Modules do
 				if Module.Toggle then
-					Module.ToggleFunction()
+					Module["ToggleFunction"]()
 				end
 			end
 		end

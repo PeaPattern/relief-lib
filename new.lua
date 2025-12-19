@@ -896,7 +896,7 @@ local script = G2L["3"];
 			else
 				TweenService:Create(Title, TInfo, { TextColor3 = Color3.fromRGB(255, 255, 255) }):Play()
 			end
-			if Library.SaveName and not Library.Killed then Library.Save(Library.SaveName) end
+			if Library.SaveName and not Library.Killed and not Library.Loading then Library.Save(Library.SaveName) end
 		end
 		
 		local SettingToggle = false
@@ -980,7 +980,7 @@ local script = G2L["3"];
 					Connections[#Connections + 1] = NewTextBox.TextBox.FocusLost:Connect(function()
 						Config["Callback"](NewTextBox.TextBox.Text)
 						SettingTree.Value = NewTextBox.TextBox.Text
-						if Library.SaveName and not Library.Killed then Library.Save(Library.SaveName) end
+						if Library.SaveName and not Library.Killed and not Library.Loading then Library.Save(Library.SaveName) end
 					end)
 				elseif _T == "Toggle" then
 					local NewToggle = ExampleToggle:Clone()
@@ -1026,7 +1026,7 @@ local script = G2L["3"];
 							}):Play()
 						end
 						Config["Callback"](_Toggle)
-						if Library.SaveName and not Library.Killed then Library.Save(Library.SaveName) end
+						if Library.SaveName and not Library.Killed and not Library.Loading then Library.Save(Library.SaveName) end
 					end
 
 					SettingTree.Load = function(Value)
@@ -1072,7 +1072,7 @@ local script = G2L["3"];
 
 	Library.KillScript = function()
 		Library.Killed = 1
-		if Library.SaveName then Library.Save(Library.SaveName) end
+		if Library.SaveName and not Library.Loading then Library.Save(Library.SaveName) end
 		
 		for _, Category in Categories do
 			for _, Module in Category.Modules do
@@ -1148,6 +1148,7 @@ local script = G2L["3"];
 		local FileName = "Relief/" .. Name .. ".json"
 		if not isfile(FileName) then return end
 
+		Library.Loading = true
 		local Data = HttpService:JSONDecode(readfile(FileName))
 		for Name, Data in Data do
 			local Toggled, SavedSettings = Data[1], Data[2]
@@ -1172,8 +1173,8 @@ local script = G2L["3"];
 				end
 			end
 		end
-
 		Library.Recolor(ThemeColor)
+		Library.Loading = false
 	end
 
 	Library.AutoSaveName = function(Name)

@@ -1121,10 +1121,17 @@ local script = G2L["3"];
 		local Data = {}
 
 		for _, Category in Categories do
-			for _, Module in Category.Modules do				
-				Data[Module.Name] = {
-					Module.Toggle, Module.Setting
-				}
+			for _, Module in Category.Modules do
+				local Settings = {}
+
+				for _, Setting in Module.Settings do
+					table.insert(Settings, {
+						Title = Setting.Title,
+						Value = Setting.Value
+					})
+				end
+				
+				Data[Module.Name] = {Module.Toggle, Settings}
 			end
 		end
 
@@ -1150,7 +1157,7 @@ local script = G2L["3"];
 			end
 
 			for _, LoadedSetting in SavedSettings do
-				local Title, Type, Value = LoadedSetting.Title, LoadedSetting.Type, LoadedSetting.Value
+				local Title, Value = LoadedSetting.Title, LoadedSetting.Value
 				for _, Setting in Module.Settings do
 					if Setting.Title == Title then
 						Setting.Load(Value)

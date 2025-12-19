@@ -896,7 +896,7 @@ local script = G2L["3"];
 			else
 				TweenService:Create(Title, TInfo, { TextColor3 = Color3.fromRGB(255, 255, 255) }):Play()
 			end
-			if Library.SaveName then Library.Save(Library.SaveName) end
+			if Library.SaveName then warn("saved") Library.Save(Library.SaveName) end
 		end
 		
 		local SettingToggle = false

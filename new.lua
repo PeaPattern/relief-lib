@@ -884,6 +884,7 @@ local script = G2L["3"];
 			["Keybind"] = KeyBind or nil,
 			["UI"] = NewModule,
 			["Default"] = Default,
+			["Settings"] = {},
 		}
 
 		Tree["ToggleFunction"] = function()
@@ -960,9 +961,24 @@ local script = G2L["3"];
 					NewTextBox.Parent = Settings.SF
 					NewTextBox.TextBox.PlaceholderText = Config["Placeholder"]
 					NewTextBox.Title.Text = Config["Title"]
+
+					local SettingTree = {
+						Title = Config.Title,
+						Type = _T,
+						Value = NewTextBox.TextBox.Text
+					}
+
+					SettingTree.Load = function(Value)
+						SettingTree.Value = Value
+						NewTextBox.Text = Value
+						Config.Callback(Value)
+					end
+
+					table.insert(Tree.Settings, SettingTree)
 	
 					Connections[#Connections + 1] = NewTextBox.TextBox.FocusLost:Connect(function()
 						Config["Callback"](NewTextBox.TextBox.Text)
+						SettingTree.Value = NewTextBox.TextBox.Text
 					end)
 				elseif _T == "Toggle" then
 					local NewToggle = ExampleToggle:Clone()
@@ -976,11 +992,20 @@ local script = G2L["3"];
 
 					local function ApplyBrightness(Col, Amplitude)
 						return Color3.new(Col.R * Amplitude, Col.G * Amplitude, Col.B * Amplitude)
-					end
+					end 
+
+					local SettingTree = {
+						Title = Config.Title,
+						Type = _T,
+						Value = false
+					}
+
+					table.insert(Tree.Settings, SettingTree)
 	
 					local _Toggle = false
 					local function Toggled()
 						_Toggle = not _Toggle
+						SettingTree.Value = _Toggle
 						if _Toggle then
 							TweenService:Create(Button, TInfo, {
 								BackgroundColor3 = ThemeColor,
@@ -999,6 +1024,12 @@ local script = G2L["3"];
 							}):Play()
 						end
 						Config["Callback"](_Toggle)
+					end
+
+					SettingTree.Load = function(Value)
+						if Value then
+							Toggled()
+						end
 					end
 	
 					Button.MouseButton1Click:Connect(Toggled)
@@ -1091,7 +1122,13 @@ local script = G2L["3"];
 
 		for _, Category in Categories do
 			for _, Module in Category.Modules do
-				Data[Module.Name] = {Module.Toggle}
+				Data[Module.Name] = {
+					Module.Toggle, {
+						Title = Module.Settings,
+						Type = Module.Type,
+						Value = Module.Value
+					}
+				}
 			end
 		end
 
@@ -1104,7 +1141,7 @@ local script = G2L["3"];
 
 		local Data = HttpService:JSONDecode(readfile(FileName))
 		for Name, Data in Data do
-			local Toggled = Data[1]
+			local Toggled, SavedSettings = Data[1], Data[2]
 			if Name == "KillScript" then continue end
 			
 			local Module = Library.getModule(Name)
@@ -1114,6 +1151,16 @@ local script = G2L["3"];
 				Module["ToggleFunction"]()
 			elseif not Toggled and Module["Default"] then
 				Module["ToggleFunction"]()
+			end
+
+			for _, LoadedSetting in SavedSettings do
+				local Title, Type, Value = LoadedSetting.Title, LoadedSetting.Type, LoadedSetting.Value
+				for _, Setting in Module.Settings do
+					if Setting.Title == Title then
+						Setting.Load(Value)
+						break
+					end
+				end
 			end
 		end
 	end

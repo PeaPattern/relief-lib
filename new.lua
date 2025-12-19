@@ -1156,7 +1156,8 @@ local script = G2L["3"];
 				
 				local Module = Library.getModule(Name)
 				if not Module then warn(Name) continue end
-				
+
+				print(Module.Name, Toggled)
 				if Toggled and not Module["Default"] then
 					Module["ToggleFunction"](1)
 				elseif not Toggled and Module["Default"] then

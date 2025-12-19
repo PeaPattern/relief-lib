@@ -1124,7 +1124,7 @@ local script = G2L["3"];
 			for _, Module in Category.Modules do
 				Data[Module.Name] = {
 					Module.Toggle, {
-						["Title"] = Module.Settings,
+						["Title"] = Module.Title,
 						["Type"] = Module.Type,
 						["Value"] = Module.Value
 					}

@@ -1174,7 +1174,9 @@ local script = G2L["3"];
 				end
 			end
 
-			Library.Recolor(ThemeColor)
+			task.defer(function()
+				Library.Recolor(ThemeColor)
+			end)
 		end)
 	end
 

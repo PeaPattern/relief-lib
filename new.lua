@@ -970,7 +970,7 @@ local script = G2L["3"];
 
 					SettingTree.Load = function(Value)
 						SettingTree.Value = Value
-						NewTextBox.Text = Value
+						NewTextBox.TextBox.Text = Value
 						Config.Callback(Value)
 					end
 

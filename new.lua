@@ -1008,6 +1008,7 @@ local script = G2L["3"];
 					local function Toggled(isLoading)
 						_Toggle = not _Toggle
 						SettingTree.Value = _Toggle
+						if Library.SaveName and not Library.Killed and not isLoading then warn("TOGGLE CONFIG SAVE") Library.Save(Library.SaveName) end
 						if _Toggle then
 							TweenService:Create(Button, TInfo, {
 								BackgroundColor3 = ThemeColor,
@@ -1026,7 +1027,6 @@ local script = G2L["3"];
 							}):Play()
 						end
 						Config["Callback"](_Toggle)
-						if Library.SaveName and not Library.Killed and not isLoading then warn("TOGGLE CONFIG SAVE") Library.Save(Library.SaveName) end
 					end
 
 					SettingTree.Load = function(Value)

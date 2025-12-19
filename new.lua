@@ -1166,6 +1166,8 @@ local script = G2L["3"];
 				end
 			end
 		end
+
+		Library.Recolor(ThemeColor)
 	end
 	
 	Library.ModuleList = ModuleList

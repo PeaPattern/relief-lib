@@ -896,7 +896,7 @@ local script = G2L["3"];
 			else
 				TweenService:Create(Title, TInfo, { TextColor3 = Color3.fromRGB(255, 255, 255) }):Play()
 			end
-			if Library.SaveName and not Library.Killed and not isLoading then warn("TOGGLE SAVE") Library.Save(Library.SaveName) end
+			if Library.SaveName and not Library.Killed and not isLoading then Library.Save(Library.SaveName) end
 		end
 		
 		local SettingToggle = false
@@ -980,7 +980,7 @@ local script = G2L["3"];
 					Connections[#Connections + 1] = NewTextBox.TextBox.FocusLost:Connect(function()
 						Config["Callback"](NewTextBox.TextBox.Text)
 						SettingTree.Value = NewTextBox.TextBox.Text
-						if Library.SaveName and not Library.Killed then warn("TEXTBOX SAVE") Library.Save(Library.SaveName) end
+						if Library.SaveName and not Library.Killed then Library.Save(Library.SaveName) end
 					end)
 				elseif _T == "Toggle" then
 					local NewToggle = ExampleToggle:Clone()
@@ -1005,7 +1005,7 @@ local script = G2L["3"];
 					table.insert(Tree.Settings, SettingTree)
 	
 					local _Toggle = false
-					local function Toggled()
+					local function Toggled(isLoading)
 						_Toggle = not _Toggle
 						SettingTree.Value = _Toggle
 						if _Toggle then
@@ -1026,12 +1026,12 @@ local script = G2L["3"];
 							}):Play()
 						end
 						Config["Callback"](_Toggle)
-						if Library.SaveName and not Library.Killed then warn("TOGGLE SETTING SAVE") Library.Save(Library.SaveName) end
+						if Library.SaveName and not Library.Killed and not isLoading then Library.Save(Library.SaveName) end
 					end
 
 					SettingTree.Load = function(Value)
 						if Value then
-							Toggled()
+							Toggled(1)
 						end
 					end
 	

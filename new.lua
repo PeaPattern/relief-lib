@@ -1149,8 +1149,8 @@ local script = G2L["3"];
 			local FileName = "Relief/" .. Name .. ".json"
 			if not isfile(FileName) then return end
 
-			local Data = HttpService:JSONDecode(readfile(FileName))
-			for Name, Data in Data do
+			local JsonData = HttpService:JSONDecode(readfile(FileName))
+			for Name, Data in JsonData do
 				local Toggled, SavedSettings = Data[1], Data[2]
 				if Name == "KillScript" then continue end
 				
